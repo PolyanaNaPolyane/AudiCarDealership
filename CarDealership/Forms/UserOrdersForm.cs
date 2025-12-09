@@ -37,6 +37,7 @@ namespace CarDealership.Forms
             _allOrders = await _orderService.GetAllAsync();
             _ordersBindingSource.DataSource = ToOrdersTable(_allOrders);
             ordersDataGridView.DataSource = _ordersBindingSource;
+            ordersDataGridView.Columns["Id"].Visible = false;
         }
 
         private DataTable ToOrdersTable(IEnumerable<Order> orders)
@@ -59,17 +60,47 @@ namespace CarDealership.Forms
 
         private void applyButton_Click(object sender, EventArgs e)
         {
+            var ordersFilteringForm = new OrdersFilteringForm(_ordersFilter);
+            ordersFilteringForm.ShowDialog();
+            _ordersFilter = ordersFilteringForm.OrdersFilter;
 
+            var filteredOrders = _allOrders;
+
+            if (_ordersFilter.PriceFrom.HasValue)
+            {
+                filteredOrders = filteredOrders.Where(order => order.OverallPrice >= _ordersFilter.PriceFrom.Value);
+            }
+
+            if (_ordersFilter.PriceTo.HasValue)
+            {
+                filteredOrders = filteredOrders.Where(order => order.OverallPrice <= _ordersFilter.PriceFrom.Value);
+            }
+
+            if (_ordersFilter.SelectedStatuses.Count != 0)
+            {
+                filteredOrders =
+                    filteredOrders.Where(order => _ordersFilter.SelectedStatuses.Contains((int)order.Status));
+            }
+            
+            _ordersBindingSource.DataSource = ToOrdersTable(filteredOrders);
+            ordersDataGridView.Columns["Id"].Visible = false;
         }
 
         private void resetButton_Click(object sender, EventArgs e)
         {
+            _ordersFilter = new OrdersFilter
+            {
+                PriceFrom = null,
+                PriceTo = null,
+                SelectedStatuses = []
+            };
 
+            _ordersBindingSource.DataSource = ToOrdersTable(_allOrders);
+            ordersDataGridView.Columns["Id"].Visible = false;
         }
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
