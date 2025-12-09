@@ -41,6 +41,7 @@ public partial class UserCarsForm : Form
         _allCars = await _carService.GetAllAvailableAsync();
         _carsBindingSource.DataSource = ToCarsTable(_allCars);
         carsDataGridView.DataSource = _carsBindingSource;
+        carsDataGridView.Columns["Id"].Visible = false;
     }
 
     private void searchButton_Click(object sender, EventArgs e)
