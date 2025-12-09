@@ -28,108 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            filterGroupBox = new GroupBox();
-            resetButton = new Button();
-            applyButton = new Button();
-            searchGroupBox = new GroupBox();
-            searchButton = new Button();
-            searchTextBox = new TextBox();
-            carsDataGridView = new DataGridView();
-            filterGroupBox.SuspendLayout();
-            searchGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)carsDataGridView).BeginInit();
+            priceGroupBox = new GroupBox();
+            priceFromLabel = new Label();
+            priceToLabel = new Label();
+            priceFromTextBox = new TextBox();
+            priceToTextBox = new TextBox();
+            statusGroupBox = new GroupBox();
+            statusCheckedListBox = new CheckedListBox();
+            okButton = new Button();
+            priceGroupBox.SuspendLayout();
+            statusGroupBox.SuspendLayout();
             SuspendLayout();
             // 
-            // filterGroupBox
+            // priceGroupBox
             // 
-            filterGroupBox.Controls.Add(resetButton);
-            filterGroupBox.Controls.Add(applyButton);
-            filterGroupBox.Location = new Point(371, 12);
-            filterGroupBox.Name = "filterGroupBox";
-            filterGroupBox.Size = new Size(309, 65);
-            filterGroupBox.TabIndex = 7;
-            filterGroupBox.TabStop = false;
-            filterGroupBox.Text = "Фільтрація";
+            priceGroupBox.Controls.Add(priceFromLabel);
+            priceGroupBox.Controls.Add(priceToLabel);
+            priceGroupBox.Controls.Add(priceFromTextBox);
+            priceGroupBox.Controls.Add(priceToTextBox);
+            priceGroupBox.Location = new Point(223, 12);
+            priceGroupBox.Name = "priceGroupBox";
+            priceGroupBox.Size = new Size(209, 110);
+            priceGroupBox.TabIndex = 8;
+            priceGroupBox.TabStop = false;
+            priceGroupBox.Text = "Ціна";
             // 
-            // resetButton
+            // priceFromLabel
             // 
-            resetButton.Location = new Point(173, 26);
-            resetButton.Name = "resetButton";
-            resetButton.Size = new Size(127, 29);
-            resetButton.TabIndex = 1;
-            resetButton.Text = "Зняти фільтр";
-            resetButton.UseVisualStyleBackColor = true;
+            priceFromLabel.AutoSize = true;
+            priceFromLabel.Location = new Point(6, 23);
+            priceFromLabel.Name = "priceFromLabel";
+            priceFromLabel.Size = new Size(33, 20);
+            priceFromLabel.TabIndex = 1;
+            priceFromLabel.Text = "Від:";
             // 
-            // applyButton
+            // priceToLabel
             // 
-            applyButton.Location = new Point(6, 26);
-            applyButton.Name = "applyButton";
-            applyButton.Size = new Size(161, 29);
-            applyButton.TabIndex = 0;
-            applyButton.Text = "Накласти фільтр";
-            applyButton.UseVisualStyleBackColor = true;
+            priceToLabel.AutoSize = true;
+            priceToLabel.Location = new Point(6, 59);
+            priceToLabel.Name = "priceToLabel";
+            priceToLabel.Size = new Size(31, 20);
+            priceToLabel.TabIndex = 2;
+            priceToLabel.Text = "До:";
             // 
-            // searchGroupBox
+            // priceFromTextBox
             // 
-            searchGroupBox.Controls.Add(searchButton);
-            searchGroupBox.Controls.Add(searchTextBox);
-            searchGroupBox.Location = new Point(10, 12);
-            searchGroupBox.Name = "searchGroupBox";
-            searchGroupBox.Size = new Size(355, 65);
-            searchGroupBox.TabIndex = 6;
-            searchGroupBox.TabStop = false;
-            searchGroupBox.Text = "Пошук";
+            priceFromTextBox.Location = new Point(71, 23);
+            priceFromTextBox.Name = "priceFromTextBox";
+            priceFromTextBox.Size = new Size(125, 27);
+            priceFromTextBox.TabIndex = 3;
             // 
-            // searchButton
+            // priceToTextBox
             // 
-            searchButton.Location = new Point(255, 25);
-            searchButton.Name = "searchButton";
-            searchButton.Size = new Size(94, 29);
-            searchButton.TabIndex = 5;
-            searchButton.Text = "Шукати";
-            searchButton.UseVisualStyleBackColor = true;
+            priceToTextBox.Location = new Point(71, 56);
+            priceToTextBox.Name = "priceToTextBox";
+            priceToTextBox.Size = new Size(125, 27);
+            priceToTextBox.TabIndex = 4;
             // 
-            // searchTextBox
+            // statusGroupBox
             // 
-            searchTextBox.Location = new Point(6, 26);
-            searchTextBox.Name = "searchTextBox";
-            searchTextBox.Size = new Size(243, 27);
-            searchTextBox.TabIndex = 5;
+            statusGroupBox.Controls.Add(statusCheckedListBox);
+            statusGroupBox.Location = new Point(10, 12);
+            statusGroupBox.Name = "statusGroupBox";
+            statusGroupBox.Size = new Size(207, 110);
+            statusGroupBox.TabIndex = 9;
+            statusGroupBox.TabStop = false;
+            statusGroupBox.Text = "Статус";
             // 
-            // carsDataGridView
+            // statusCheckedListBox
             // 
-            carsDataGridView.ColumnHeadersHeight = 29;
-            carsDataGridView.Location = new Point(10, 83);
-            carsDataGridView.Name = "carsDataGridView";
-            carsDataGridView.RowHeadersWidth = 51;
-            carsDataGridView.Size = new Size(670, 198);
-            carsDataGridView.TabIndex = 8;
+            statusCheckedListBox.FormattingEnabled = true;
+            statusCheckedListBox.Items.AddRange(new object[] { "Очікує підтверження", "Підтверджений", "Відхилений" });
+            statusCheckedListBox.Location = new Point(15, 25);
+            statusCheckedListBox.Name = "statusCheckedListBox";
+            statusCheckedListBox.Size = new Size(177, 70);
+            statusCheckedListBox.TabIndex = 10;
+            // 
+            // okButton
+            // 
+            okButton.Location = new Point(175, 131);
+            okButton.Name = "okButton";
+            okButton.Size = new Size(94, 29);
+            okButton.TabIndex = 10;
+            okButton.Text = "ОК";
+            okButton.UseVisualStyleBackColor = true;
+            okButton.Click += okButton_Click;
             // 
             // OrdersFilteringForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(690, 290);
-            Controls.Add(carsDataGridView);
-            Controls.Add(filterGroupBox);
-            Controls.Add(searchGroupBox);
+            ClientSize = new Size(444, 169);
+            Controls.Add(okButton);
+            Controls.Add(statusGroupBox);
+            Controls.Add(priceGroupBox);
             Name = "OrdersFilteringForm";
             Text = "OrdersFilteringForm";
-            filterGroupBox.ResumeLayout(false);
-            searchGroupBox.ResumeLayout(false);
-            searchGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)carsDataGridView).EndInit();
+            priceGroupBox.ResumeLayout(false);
+            priceGroupBox.PerformLayout();
+            statusGroupBox.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private GroupBox filterGroupBox;
-        private Button resetButton;
-        private Button applyButton;
-        private GroupBox searchGroupBox;
-        private Button searchButton;
-        private TextBox searchTextBox;
-        private DataGridView carsDataGridView;
+        private GroupBox priceGroupBox;
+        private Label priceFromLabel;
+        private Label priceToLabel;
+        private TextBox priceFromTextBox;
+        private TextBox priceToTextBox;
+        private GroupBox statusGroupBox;
+        private CheckedListBox statusCheckedListBox;
+        private Button okButton;
     }
 }
