@@ -101,6 +101,43 @@ namespace CarDealership.Forms
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            string searchText = searchTextBox.Text.Trim();
+
+            foreach (DataGridViewRow row in ordersDataGridView.Rows)
+            {
+                row.DefaultCellStyle.BackColor = Color.White;
+            }
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                return;
+            }
+
+            int foundRowsCount = 0;
+
+            foreach (DataGridViewRow row in ordersDataGridView.Rows)
+            {
+                if (row.IsNewRow)
+                {
+                    continue;
+                }
+
+                var modelName = row.Cells[1].Value.ToString();
+
+                if (!modelName.Contains(searchText))
+                {
+                    continue;
+                }
+
+                foundRowsCount++;
+                row.DefaultCellStyle.BackColor = Color.LightGreen;
+            }
+
+            if (foundRowsCount == 0)
+            {
+                MessageBox.Show("Записів не було знайдено", "Попередження", MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning);
+            }
         }
     }
 }
