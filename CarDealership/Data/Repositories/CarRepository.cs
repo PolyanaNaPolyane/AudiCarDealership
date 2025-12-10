@@ -18,6 +18,16 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         await command.ExecuteNonQueryAsync();
     }
 
+    public async Task<int> GetAvailableCountAsync()
+    {
+        var sql = "SELECT COUNT(*) FROM [Car] WHERE Status = 0";
+        
+        await using var command = new SqlCommand(sql, Connection);
+        var result = await command.ExecuteScalarAsync();
+
+        return result != null ? Convert.ToInt32(result) : 0;
+    }
+
     public async Task<IEnumerable<Car>> GetAvaliableAllAsync()
     {
         var cars = new List<Car>();

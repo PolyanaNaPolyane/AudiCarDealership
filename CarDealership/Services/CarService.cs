@@ -12,6 +12,11 @@ public class CarService(ICarRepository carRepository) : ICarService
         return carRepository.GetAvaliableAllAsync();
     }
 
+    public Task<int> GetAvailableByAllDealersAsync()
+    {
+        return carRepository.GetAvailableCountAsync();
+    }
+
     // public Task AddAsync(Car car)
     // {
     //     return carRepository.AddAsync(car);
