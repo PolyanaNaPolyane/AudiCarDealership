@@ -7,9 +7,10 @@ namespace CarDealership.Services;
 
 public class OrderService(IOrderRepository orderRepository, ICarRepository carRepository, AccountContext accountContext) : IOrderService
 {
-    public Task<IEnumerable<Order>> GetAllAsync()
+    public Task<IEnumerable<Order>> GetAllByAccountAsync()
     {
-        return orderRepository.GetAllAsync();
+        //return orderRepository.GetAllAsync(accountContext.CurrentAccount.Id);
+        return orderRepository.GetAllAsync(1);
     }
 
     public async Task AddAsync(Car car)

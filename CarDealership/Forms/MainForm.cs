@@ -40,7 +40,7 @@ public partial class MainForm : Form
 
     private async Task LoadOrdersAsync()
     {
-        var orders = await _orderService.GetAllAsync();
+        var orders = await _orderService.GetAllByAccountAsync();
         _ordersBindingSource.DataSource = orders;
         ordersDataGridView.DataSource = _ordersBindingSource;
     }

@@ -30,17 +30,15 @@ public partial class CarDetailsForm : Form
 
     private void exportButton_Click(object sender, EventArgs e)
     {
-        using (var folderBrowsingDialog = new FolderBrowserDialog())
-        {
-            folderBrowsingDialog.Description = "Оберіть папку для збереження звіту";
-            folderBrowsingDialog.UseDescriptionForTitle = true;
+        using var folderBrowsingDialog = new FolderBrowserDialog();
+        folderBrowsingDialog.Description = "Оберіть папку для збереження звіту";
+        folderBrowsingDialog.UseDescriptionForTitle = true;
 
-            if (folderBrowsingDialog.ShowDialog() == DialogResult.OK)
-            {
-                var selectedPath = folderBrowsingDialog.SelectedPath;
-                _car.GeneratePdf(Path.Combine(selectedPath, $"{_car.VIN}-details.pdf"));
-                MessageUtil.ShowInformation("Деталі автомобіля успішно експортовані");
-            }
+        if (folderBrowsingDialog.ShowDialog() == DialogResult.OK)
+        {
+            var selectedPath = folderBrowsingDialog.SelectedPath;
+            _car.GeneratePdf(Path.Combine(selectedPath, $"{_car.VIN}-details.pdf"));
+            MessageUtil.ShowInformation("Деталі автомобіля успішно експортовані");
         }
     }
 }

@@ -35,15 +35,18 @@
             searchGroupBox = new GroupBox();
             searchButton = new Button();
             searchTextBox = new TextBox();
+            menuStrip = new MenuStrip();
+            exportToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)ordersDataGridView).BeginInit();
             filterGroupBox.SuspendLayout();
             searchGroupBox.SuspendLayout();
+            menuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // ordersDataGridView
             // 
             ordersDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ordersDataGridView.Location = new Point(12, 83);
+            ordersDataGridView.Location = new Point(12, 102);
             ordersDataGridView.Name = "ordersDataGridView";
             ordersDataGridView.RowHeadersWidth = 51;
             ordersDataGridView.Size = new Size(670, 198);
@@ -53,7 +56,7 @@
             // 
             filterGroupBox.Controls.Add(resetButton);
             filterGroupBox.Controls.Add(applyButton);
-            filterGroupBox.Location = new Point(373, 12);
+            filterGroupBox.Location = new Point(373, 31);
             filterGroupBox.Name = "filterGroupBox";
             filterGroupBox.Size = new Size(309, 65);
             filterGroupBox.TabIndex = 7;
@@ -84,7 +87,7 @@
             // 
             searchGroupBox.Controls.Add(searchButton);
             searchGroupBox.Controls.Add(searchTextBox);
-            searchGroupBox.Location = new Point(12, 12);
+            searchGroupBox.Location = new Point(12, 31);
             searchGroupBox.Name = "searchGroupBox";
             searchGroupBox.Size = new Size(355, 65);
             searchGroupBox.TabIndex = 6;
@@ -108,14 +111,33 @@
             searchTextBox.Size = new Size(243, 27);
             searchTextBox.TabIndex = 5;
             // 
+            // menuStrip
+            // 
+            menuStrip.ImageScalingSize = new Size(20, 20);
+            menuStrip.Items.AddRange(new ToolStripItem[] { exportToolStripMenuItem });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(696, 28);
+            menuStrip.TabIndex = 8;
+            menuStrip.Text = "menuStrip1";
+            // 
+            // exportToolStripMenuItem
+            // 
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            exportToolStripMenuItem.Size = new Size(116, 24);
+            exportToolStripMenuItem.Text = "Експортувати";
+            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
+            // 
             // UserOrdersForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(696, 296);
+            ClientSize = new Size(696, 311);
             Controls.Add(filterGroupBox);
             Controls.Add(searchGroupBox);
             Controls.Add(ordersDataGridView);
+            Controls.Add(menuStrip);
+            MainMenuStrip = menuStrip;
             Name = "UserOrdersForm";
             Text = "UserOrdersForm";
             Load += UserOrdersForm_Load;
@@ -123,7 +145,10 @@
             filterGroupBox.ResumeLayout(false);
             searchGroupBox.ResumeLayout(false);
             searchGroupBox.PerformLayout();
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -135,5 +160,7 @@
         private GroupBox searchGroupBox;
         private Button searchButton;
         private TextBox searchTextBox;
+        private MenuStrip menuStrip;
+        private ToolStripMenuItem exportToolStripMenuItem;
     }
 }

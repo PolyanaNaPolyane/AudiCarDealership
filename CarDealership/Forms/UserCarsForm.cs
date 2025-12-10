@@ -2,6 +2,7 @@
 using CarDealership.Data.Entities;
 using CarDealership.Enums;
 using CarDealership.Services.Interfaces;
+using CarDealership.Utils;
 
 namespace CarDealership.Forms;
 
@@ -155,12 +156,12 @@ public partial class UserCarsForm : Form
         carsTable.Columns.Add("Ціна", typeof(decimal));
         carsTable.Columns.Add("Колір", typeof(string));
         carsTable.Columns.Add("Рік випуску", typeof(int));
-        carsTable.Columns.Add("Статус", typeof(CarStatus));
+        carsTable.Columns.Add("Статус", typeof(string));
 
         foreach (var car in cars)
         {
             carsTable.Rows.Add(car.Id, car.TechnicalCharacteristics.Model.Name, car.Price, car.Color, car.Year,
-                car.Status);
+                car.Status.GetDisplayName());
         }
 
         return carsTable;

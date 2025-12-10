@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using CarDealership.Data.Entities;
-using CarDealership.Enums;
 using CarDealership.Services.Interfaces;
 using CarDealership.Utils;
 
@@ -34,7 +33,7 @@ namespace CarDealership.Forms
 
         private async Task LoadOrdersAsync()
         {
-            _allOrders = await _orderService.GetAllAsync();
+            _allOrders = await _orderService.GetAllByAccountAsync();
             _ordersBindingSource.DataSource = ToOrdersTable(_allOrders);
             ordersDataGridView.DataSource = _ordersBindingSource;
             ordersDataGridView.Columns["Id"].Visible = false;
@@ -47,7 +46,7 @@ namespace CarDealership.Forms
             ordersTable.Columns.Add("Автомобіль", typeof(string));
             ordersTable.Columns.Add("Загальна ціна", typeof(decimal));
             ordersTable.Columns.Add("Дата створення", typeof(DateTime));
-            ordersTable.Columns.Add("Статус", typeof(OrderStatus));
+            ordersTable.Columns.Add("Статус", typeof(string));
 
             foreach (var order in orders)
             {
@@ -81,7 +80,7 @@ namespace CarDealership.Forms
                 filteredOrders =
                     filteredOrders.Where(order => _ordersFilter.SelectedStatuses.Contains((int)order.Status));
             }
-            
+
             _ordersBindingSource.DataSource = ToOrdersTable(filteredOrders);
             ordersDataGridView.Columns["Id"].Visible = false;
         }
@@ -137,6 +136,24 @@ namespace CarDealership.Forms
             {
                 MessageBox.Show("Записів не було знайдено", "Попередження", MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Warning);
+            }
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedRowView = (DataRowView)ordersDataGridView.CurrentRow.DataBoundItem;
+            var selectedRow = selectedRowView.Row;
+            var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
+            
+            using var folderBrowsingDialog = new FolderBrowserDialog();
+            folderBrowsingDialog.Description = "Оберіть папку для збереження звіту";
+            folderBrowsingDialog.UseDescriptionForTitle = true;
+
+            if (folderBrowsingDialog.ShowDialog() == DialogResult.OK)
+            {
+                var selectedPath = folderBrowsingDialog.SelectedPath;
+                selectedOrder.GeneratePdf(Path.Combine(selectedPath, $"{selectedOrder.Car.VIN}-order-details.pdf"));
+                MessageUtil.ShowInformation("Деталі замовлення автомобіля успішно експортовані");
             }
         }
     }
