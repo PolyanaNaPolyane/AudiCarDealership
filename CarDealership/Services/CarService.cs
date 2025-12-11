@@ -17,6 +17,11 @@ public class CarService(ICarRepository carRepository) : ICarService
         return carRepository.GetAvailableCountAsync();
     }
 
+    public Task<IEnumerable<string>> GetMostPopularModelsAsync()
+    {
+        return carRepository.GetMostPopularModelsAsync();
+    }
+
     // public Task AddAsync(Car car)
     // {
     //     return carRepository.AddAsync(car);

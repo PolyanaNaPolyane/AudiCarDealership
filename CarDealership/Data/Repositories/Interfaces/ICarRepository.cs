@@ -11,7 +11,7 @@ public interface ICarRepository
 
     Task<int> GetAvailableCountAsync();
 
-    Task<IEnumerable<string>> GetMostPopularModelAsync();
+    Task<IEnumerable<string>> GetMostPopularModelsAsync();
     // Task AddAsync(Car car);
     // Task UpdateAsync(Car car);
     // Task RemoveAsync(int id);

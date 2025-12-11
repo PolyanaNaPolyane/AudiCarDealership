@@ -82,7 +82,7 @@ partial class MainManagerForm
         spentMoneyGroupBox.Size = new Size(180, 120);
         spentMoneyGroupBox.TabIndex = 1;
         spentMoneyGroupBox.TabStop = false;
-        spentMoneyGroupBox.Text = "Найпопулярніша модель";
+        spentMoneyGroupBox.Text = "Найпопулярніші моделі";
         // 
         // mostPopularCarsLabel
         // 

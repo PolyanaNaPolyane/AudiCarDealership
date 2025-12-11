@@ -18,7 +18,7 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         await command.ExecuteNonQueryAsync();
     }
 
-    public async Task<IEnumerable<string>> GetMostPopularModelAsync()
+    public async Task<IEnumerable<string>> GetMostPopularModelsAsync()
     {
         var sql = @"
             WITH ModelOrderCounts AS (

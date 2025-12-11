@@ -21,7 +21,9 @@ public partial class MainManagerForm : Form
     private async void MainManagerForm_Load(object sender, EventArgs e)
     {
         var carsCount = await _carService.GetAvailableByAllDealersAsync();
+        var mostPopularModels = await _carService.GetMostPopularModelsAsync();
 
         carsCountLabel.Text = carsCount.ToString();
+        mostPopularCarsLabel.Text = string.Join(", ", mostPopularModels);
     }
 }
