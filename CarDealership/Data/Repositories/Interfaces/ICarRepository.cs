@@ -10,6 +10,8 @@ public interface ICarRepository
     Task ChangeStatus(int id, CarStatus status);
 
     Task<int> GetAvailableCountAsync();
+
+    Task<IEnumerable<string>> GetMostPopularModelAsync();
     // Task AddAsync(Car car);
     // Task UpdateAsync(Car car);
     // Task RemoveAsync(int id);

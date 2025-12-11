@@ -18,10 +18,48 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         await command.ExecuteNonQueryAsync();
     }
 
+    public async Task<IEnumerable<string>> GetMostPopularModelAsync()
+    {
+        var sql = @"
+            WITH ModelOrderCounts AS (
+                SELECT 
+                    model.Name,
+                    COUNT(o.Id) as OrderCount
+                FROM [Model] model
+                INNER JOIN [TechnicalCharacteristics] technicalCharacteristics ON technicalCharacteristics.ModelId = model.Id
+                INNER JOIN [Car] car ON car.TechnicalCharacteristicsId = technicalCharacteristics.Id
+                INNER JOIN [Order] o ON o.CarId = car.Id
+                WHERE o.Status = 1
+                GROUP BY model.Id, model.Name
+            ),
+            MaxOrderCount AS (
+                SELECT MAX(OrderCount) as MaxCount
+                FROM ModelOrderCounts
+            )
+            SELECT modelOrderCounts.Name
+            FROM ModelOrderCounts modelOrderCounts
+            CROSS JOIN MaxOrderCount maxOrderCount
+            WHERE modelOrderCounts.OrderCount = maxOrderCount.MaxCount
+            ORDER BY modelOrderCounts.Name
+        ";
+
+        var mostPopularModels = new List<string>();
+        
+        await using var command = new SqlCommand(sql, Connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            mostPopularModels.Add(reader.GetString(reader.GetOrdinal(nameof(Model.Name))));
+        }
+        
+        return mostPopularModels;
+    }
+
     public async Task<int> GetAvailableCountAsync()
     {
         var sql = "SELECT COUNT(*) FROM [Car] WHERE Status = 0";
-        
+
         await using var command = new SqlCommand(sql, Connection);
         var result = await command.ExecuteScalarAsync();
 
