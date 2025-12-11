@@ -8,4 +8,5 @@ public interface IOrderRepository
     Task AddAsync(Order order);
     Task<int> GetOrdersCountAsync(int accountId);
     Task<decimal> GetOverrallSpentMoneyAsync(int accountId);
+    Task<decimal> GetOverallProfitAsync();
 }

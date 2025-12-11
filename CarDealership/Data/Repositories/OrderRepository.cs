@@ -125,13 +125,23 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
 
     public async Task<decimal> GetOverrallSpentMoneyAsync(int accountId)
     {
-        var sql = @"SELECT ISNULL(SUM([OverallPrice]), 0) FROM [Order] WHERE [AccountId] = @accountId";
+        var sql = @"SELECT ISNULL(SUM([OverallPrice]), 0) FROM [Order] WHERE [AccountId] = @accountId AND Status = 1";
 
         await using var command = new SqlCommand(sql, Connection);
         command.Parameters.AddWithValue("@accountId", accountId);
 
         var result = await command.ExecuteScalarAsync();
 
-        return result != null ? Convert.ToDecimal(result) : 0;
+        return Convert.ToDecimal(result);
+    }
+
+    public async Task<decimal> GetOverallProfitAsync()
+    {
+        var sql = @"SELECT ISNULL(SUM([OverallPrice]), 0) FROM [Order] WHERE Status = 1";
+        
+        await using var command = new SqlCommand(sql, Connection);
+        var result = await command.ExecuteScalarAsync();
+
+        return Convert.ToDecimal(result);
     }
 }
