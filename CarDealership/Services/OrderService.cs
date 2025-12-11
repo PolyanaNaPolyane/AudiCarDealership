@@ -9,8 +9,12 @@ public class OrderService(IOrderRepository orderRepository, ICarRepository carRe
 {
     public Task<IEnumerable<Order>> GetAllByAccountAsync()
     {
-        //return orderRepository.GetAllAsync(accountContext.CurrentAccount.Id);
-        return orderRepository.GetAllAsync(1);
+        return orderRepository.GetAllAsync(accountContext.CurrentAccount.Id);
+    }
+
+    public Task<decimal> GetOverallProfitAsync()
+    {
+        return orderRepository.GetOverallProfitAsync();
     }
 
     public async Task AddAsync(Car car)

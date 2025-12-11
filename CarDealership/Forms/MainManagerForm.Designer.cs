@@ -32,6 +32,8 @@ partial class MainManagerForm
     private void InitializeComponent()
     {
         statisticsGroupBox = new GroupBox();
+        overallProfitGroupBox = new GroupBox();
+        overallProfitLabel = new Label();
         orderCountGroupBox = new GroupBox();
         carsCountLabel = new Label();
         spentMoneyGroupBox = new GroupBox();
@@ -40,6 +42,7 @@ partial class MainManagerForm
         accountLabel = new Label();
         welcomeLabel = new Label();
         statisticsGroupBox.SuspendLayout();
+        overallProfitGroupBox.SuspendLayout();
         orderCountGroupBox.SuspendLayout();
         spentMoneyGroupBox.SuspendLayout();
         welcomeGroupBox.SuspendLayout();
@@ -47,14 +50,33 @@ partial class MainManagerForm
         // 
         // statisticsGroupBox
         // 
+        statisticsGroupBox.Controls.Add(overallProfitGroupBox);
         statisticsGroupBox.Controls.Add(orderCountGroupBox);
         statisticsGroupBox.Controls.Add(spentMoneyGroupBox);
         statisticsGroupBox.Location = new Point(12, 99);
         statisticsGroupBox.Name = "statisticsGroupBox";
-        statisticsGroupBox.Size = new Size(422, 168);
+        statisticsGroupBox.Size = new Size(422, 250);
         statisticsGroupBox.TabIndex = 3;
         statisticsGroupBox.TabStop = false;
         statisticsGroupBox.Text = "Статистика";
+        // 
+        // overallProfitGroupBox
+        // 
+        overallProfitGroupBox.Controls.Add(overallProfitLabel);
+        overallProfitGroupBox.Location = new Point(87, 161);
+        overallProfitGroupBox.Name = "overallProfitGroupBox";
+        overallProfitGroupBox.Size = new Size(250, 77);
+        overallProfitGroupBox.TabIndex = 2;
+        overallProfitGroupBox.TabStop = false;
+        overallProfitGroupBox.Text = "Загальний прибуток";
+        // 
+        // overallProfitLabel
+        // 
+        overallProfitLabel.Location = new Point(6, 32);
+        overallProfitLabel.Name = "overallProfitLabel";
+        overallProfitLabel.Size = new Size(238, 23);
+        overallProfitLabel.TabIndex = 1;
+        overallProfitLabel.TextAlign = ContentAlignment.TopCenter;
         // 
         // orderCountGroupBox
         // 
@@ -86,11 +108,11 @@ partial class MainManagerForm
         // 
         // mostPopularCarsLabel
         // 
-        mostPopularCarsLabel.Location = new Point(6, 57);
+        mostPopularCarsLabel.Location = new Point(6, 39);
         mostPopularCarsLabel.Name = "mostPopularCarsLabel";
-        mostPopularCarsLabel.Size = new Size(168, 23);
+        mostPopularCarsLabel.Size = new Size(168, 60);
         mostPopularCarsLabel.TabIndex = 1;
-        mostPopularCarsLabel.TextAlign = ContentAlignment.TopCenter;
+        mostPopularCarsLabel.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // welcomeGroupBox
         // 
@@ -123,13 +145,14 @@ partial class MainManagerForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(447, 282);
+        ClientSize = new Size(447, 359);
         Controls.Add(welcomeGroupBox);
         Controls.Add(statisticsGroupBox);
         Name = "MainManagerForm";
         Text = "MainManagerForm";
         Load += MainManagerForm_Load;
         statisticsGroupBox.ResumeLayout(false);
+        overallProfitGroupBox.ResumeLayout(false);
         orderCountGroupBox.ResumeLayout(false);
         spentMoneyGroupBox.ResumeLayout(false);
         welcomeGroupBox.ResumeLayout(false);
@@ -146,4 +169,6 @@ partial class MainManagerForm
     private GroupBox welcomeGroupBox;
     private Label accountLabel;
     private Label welcomeLabel;
+    private GroupBox overallProfitGroupBox;
+    private Label overallProfitLabel;
 }

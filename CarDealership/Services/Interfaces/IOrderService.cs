@@ -5,5 +5,6 @@ namespace CarDealership.Services.Interfaces;
 public interface IOrderService
 {
     Task<IEnumerable<Order>> GetAllByAccountAsync();
+    Task<decimal> GetOverallProfitAsync();
     Task AddAsync(Car car);
 }
