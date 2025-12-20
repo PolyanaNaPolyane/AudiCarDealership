@@ -62,6 +62,16 @@ public class AccountRepository(string connectionString) : BaseAdoNetRepository(c
         return accounts;
     }
 
+    public async Task DeleteAsync(Account account)
+    {
+        var sql = "DELETE FROM [Account] WHERE Id = @id";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@id", account.Id);
+
+        await command.ExecuteNonQueryAsync();
+    }
+
     public async Task<Account?> FindAsync(string email)
     {
         var sql = @"SELECT * FROM [Account] WHERE [Email] = @email";

@@ -6,4 +6,5 @@ public interface IContactDetailsRepository
 {
     Task<IEnumerable<ContactDetails>> GetAllAsync();
     Task<int> AddAsync(ContactDetails contactDetails);
+    Task DeleteAsync(int id);
 }

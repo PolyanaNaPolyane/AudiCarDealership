@@ -8,7 +8,8 @@ public class AccountService(
     IAccountRepository accountRepository,
     IContactDetailsRepository contactDetailsRepository,
     IOrderRepository orderRepository,
-    IPasswordHasher passwordHasher)
+    IPasswordHasher passwordHasher,
+    AccountContext accountContext)
     : IAccountService
 {
     public Task<IEnumerable<Account>> GetAllAsync()
@@ -40,6 +41,13 @@ public class AccountService(
         account.Id = await accountRepository.AddAsync(account);
         
         return account;
+    }
+
+    public async Task DeleteAsync()
+    {
+        await accountRepository.DeleteAsync(accountContext.CurrentAccount);
+        await contactDetailsRepository.DeleteAsync(accountContext.CurrentAccount.ContactDetails.Id);
+        await orderRepository.DeleteByAccountAsync(accountContext.CurrentAccount.Id);
     }
 
     public async Task<Account?> LoginAsync(string email, string password)

@@ -44,4 +44,14 @@ public class ContactDetailsRepository(string connectionString)
 
         return (int)(await command.ExecuteScalarAsync())!;
     }
+
+    public async Task DeleteAsync(int id)
+    {
+        var sql = "DELETE FROM [ContactDetails] WHERE Id = @id";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@id", id);
+
+        await command.ExecuteNonQueryAsync();
+    }
 }

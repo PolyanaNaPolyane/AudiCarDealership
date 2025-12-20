@@ -9,4 +9,5 @@ public interface IAccountService
     Task<decimal> GetOverrallSpentMoneyAsync(int accountId);
     Task<Account?> LoginAsync(string email, string password);
     Task<Account?> RegisterAsync(Account account);
+    Task DeleteAsync();
 }

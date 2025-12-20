@@ -1,6 +1,6 @@
-﻿using CarDealership.Data.Repositories.Interfaces;
-using CarDealership.Services;
+﻿using CarDealership.Services;
 using CarDealership.Services.Interfaces;
+using CarDealership.Utils;
 
 namespace CarDealership.Forms;
 
@@ -42,5 +42,15 @@ public partial class MainCustomerForm : Form
     private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         _formNavigation.NavigateTo<UserOrdersForm>(this);
+    }
+
+    private async void deleteAccountToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var choice = MessageUtil.ShowInformation("Ви впевнені, що хочете продовжити видалення акаунта, при цьому усі незавершені замовлення також будуть видалені?");
+
+        if (choice == DialogResult.OK)
+        {
+            await _accountService.DeleteAsync();
+        }
     }
 }

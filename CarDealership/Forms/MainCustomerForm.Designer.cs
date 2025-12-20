@@ -42,6 +42,7 @@ partial class MainCustomerForm
         mainCustomerFormMenuStrip = new MenuStrip();
         carsToolStripMenuItem = new ToolStripMenuItem();
         ordersToolStripMenuItem = new ToolStripMenuItem();
+        deleteAccountToolStripMenuItem = new ToolStripMenuItem();
         orderCountGroupBox.SuspendLayout();
         spentMoneyGroupBox.SuspendLayout();
         customerStatisticsGroupBox.SuspendLayout();
@@ -126,7 +127,7 @@ partial class MainCustomerForm
         // mainCustomerFormMenuStrip
         // 
         mainCustomerFormMenuStrip.ImageScalingSize = new Size(20, 20);
-        mainCustomerFormMenuStrip.Items.AddRange(new ToolStripItem[] { carsToolStripMenuItem, ordersToolStripMenuItem });
+        mainCustomerFormMenuStrip.Items.AddRange(new ToolStripItem[] { carsToolStripMenuItem, ordersToolStripMenuItem, deleteAccountToolStripMenuItem });
         mainCustomerFormMenuStrip.Location = new Point(0, 0);
         mainCustomerFormMenuStrip.Name = "mainCustomerFormMenuStrip";
         mainCustomerFormMenuStrip.Size = new Size(447, 28);
@@ -145,6 +146,13 @@ partial class MainCustomerForm
         ordersToolStripMenuItem.Size = new Size(109, 24);
         ordersToolStripMenuItem.Text = "Замовлення";
         ordersToolStripMenuItem.Click += ordersToolStripMenuItem_Click;
+        // 
+        // deleteAccountToolStripMenuItem
+        // 
+        deleteAccountToolStripMenuItem.Name = "deleteAccountToolStripMenuItem";
+        deleteAccountToolStripMenuItem.Size = new Size(138, 24);
+        deleteAccountToolStripMenuItem.Text = "Видалити акаунт";
+        deleteAccountToolStripMenuItem.Click += deleteAccountToolStripMenuItem_Click;
         // 
         // MainCustomerForm
         // 
@@ -187,4 +195,5 @@ partial class MainCustomerForm
 
     private ToolStripMenuItem carsToolStripMenuItem;
     private ToolStripMenuItem ordersToolStripMenuItem;
+    private ToolStripMenuItem deleteAccountToolStripMenuItem;
 }

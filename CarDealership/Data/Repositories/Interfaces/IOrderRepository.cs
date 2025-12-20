@@ -10,4 +10,5 @@ public interface IOrderRepository
     Task<int> GetOrdersCountAsync(int accountId);
     Task<decimal> GetOverrallSpentMoneyAsync(int accountId);
     Task<decimal> GetOverallProfitAsync();
+    Task DeleteByAccountAsync(int accountId);
 }

@@ -255,4 +255,14 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
 
         return Convert.ToDecimal(result);
     }
+
+    public async Task DeleteByAccountAsync(int accountId)
+    {
+        var sql = "DELETE FROM [Order] WHERE AccountId = @id AND Status != 1";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@id", accountId);
+
+        await command.ExecuteNonQueryAsync();
+    }
 }

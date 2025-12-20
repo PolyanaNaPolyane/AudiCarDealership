@@ -7,8 +7,8 @@ public static class MessageUtil
         MessageBox.Show(message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
-    public static void ShowInformation(string message)
+    public static DialogResult ShowInformation(string message)
     {
-        MessageBox.Show(message, "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        return MessageBox.Show(message, "Інформація", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 }
