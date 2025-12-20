@@ -43,6 +43,9 @@
       <Compile Update="Forms\MainManagerForm.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Forms\ManagerTablesForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>

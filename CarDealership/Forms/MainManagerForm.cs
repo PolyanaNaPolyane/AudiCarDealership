@@ -30,4 +30,9 @@ public partial class MainManagerForm : Form
         mostPopularCarsLabel.Text = string.Join(", ", mostPopularModels);
         overallProfitLabel.Text = overallProfit.ToString();
     }
+
+    private void tablesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
 }

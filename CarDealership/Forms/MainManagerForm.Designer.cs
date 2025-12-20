@@ -41,11 +41,17 @@ partial class MainManagerForm
         welcomeGroupBox = new GroupBox();
         accountLabel = new Label();
         welcomeLabel = new Label();
+        menuStrip1 = new MenuStrip();
+        statisticsToolStripMenuItem = new ToolStripMenuItem();
+        tablesToolStripMenuItem = new ToolStripMenuItem();
+        statisticsPanel = new Panel();
         statisticsGroupBox.SuspendLayout();
         overallProfitGroupBox.SuspendLayout();
         orderCountGroupBox.SuspendLayout();
         spentMoneyGroupBox.SuspendLayout();
         welcomeGroupBox.SuspendLayout();
+        menuStrip1.SuspendLayout();
+        statisticsPanel.SuspendLayout();
         SuspendLayout();
         // 
         // statisticsGroupBox
@@ -53,7 +59,7 @@ partial class MainManagerForm
         statisticsGroupBox.Controls.Add(overallProfitGroupBox);
         statisticsGroupBox.Controls.Add(orderCountGroupBox);
         statisticsGroupBox.Controls.Add(spentMoneyGroupBox);
-        statisticsGroupBox.Location = new Point(12, 99);
+        statisticsGroupBox.Location = new Point(15, 90);
         statisticsGroupBox.Name = "statisticsGroupBox";
         statisticsGroupBox.Size = new Size(422, 250);
         statisticsGroupBox.TabIndex = 3;
@@ -118,7 +124,7 @@ partial class MainManagerForm
         // 
         welcomeGroupBox.Controls.Add(accountLabel);
         welcomeGroupBox.Controls.Add(welcomeLabel);
-        welcomeGroupBox.Location = new Point(12, 12);
+        welcomeGroupBox.Location = new Point(15, 3);
         welcomeGroupBox.Name = "welcomeGroupBox";
         welcomeGroupBox.Size = new Size(422, 81);
         welcomeGroupBox.TabIndex = 4;
@@ -141,13 +147,46 @@ partial class MainManagerForm
         welcomeLabel.Text = "Ласкаво просимо";
         welcomeLabel.TextAlign = ContentAlignment.TopCenter;
         // 
+        // menuStrip1
+        // 
+        menuStrip1.ImageScalingSize = new Size(20, 20);
+        menuStrip1.Items.AddRange(new ToolStripItem[] { statisticsToolStripMenuItem, tablesToolStripMenuItem });
+        menuStrip1.Location = new Point(0, 0);
+        menuStrip1.Name = "menuStrip1";
+        menuStrip1.Size = new Size(478, 28);
+        menuStrip1.TabIndex = 5;
+        menuStrip1.Text = "menuStrip";
+        // 
+        // statisticsToolStripMenuItem
+        // 
+        statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
+        statisticsToolStripMenuItem.Size = new Size(98, 24);
+        statisticsToolStripMenuItem.Text = "Статистика";
+        // 
+        // tablesToolStripMenuItem
+        // 
+        tablesToolStripMenuItem.Name = "tablesToolStripMenuItem";
+        tablesToolStripMenuItem.Size = new Size(78, 24);
+        tablesToolStripMenuItem.Text = "Таблиці";
+        tablesToolStripMenuItem.Click += tablesToolStripMenuItem_Click;
+        // 
+        // statisticsPanel
+        // 
+        statisticsPanel.Controls.Add(welcomeGroupBox);
+        statisticsPanel.Controls.Add(statisticsGroupBox);
+        statisticsPanel.Location = new Point(12, 31);
+        statisticsPanel.Name = "statisticsPanel";
+        statisticsPanel.Size = new Size(454, 353);
+        statisticsPanel.TabIndex = 6;
+        // 
         // MainManagerForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(447, 359);
-        Controls.Add(welcomeGroupBox);
-        Controls.Add(statisticsGroupBox);
+        ClientSize = new Size(478, 398);
+        Controls.Add(statisticsPanel);
+        Controls.Add(menuStrip1);
+        MainMenuStrip = menuStrip1;
         Name = "MainManagerForm";
         Text = "MainManagerForm";
         Load += MainManagerForm_Load;
@@ -156,7 +195,11 @@ partial class MainManagerForm
         orderCountGroupBox.ResumeLayout(false);
         spentMoneyGroupBox.ResumeLayout(false);
         welcomeGroupBox.ResumeLayout(false);
+        menuStrip1.ResumeLayout(false);
+        menuStrip1.PerformLayout();
+        statisticsPanel.ResumeLayout(false);
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
@@ -171,4 +214,8 @@ partial class MainManagerForm
     private Label welcomeLabel;
     private GroupBox overallProfitGroupBox;
     private Label overallProfitLabel;
+    private MenuStrip menuStrip1;
+    private ToolStripMenuItem statisticsToolStripMenuItem;
+    private ToolStripMenuItem tablesToolStripMenuItem;
+    private Panel statisticsPanel;
 }
