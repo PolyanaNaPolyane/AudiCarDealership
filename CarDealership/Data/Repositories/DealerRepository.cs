@@ -10,7 +10,7 @@ public class DealerRepository(string connectionString) : BaseAdoNetRepository(co
     {
         var dealers = new List<Dealer>();
         
-        var sql = "SELECT * FROM [Model]";
+        var sql = "SELECT * FROM [Dealer]";
 
         await using var command = new SqlCommand(sql, Connection);
         await using var reader = await command.ExecuteReaderAsync();

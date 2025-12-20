@@ -53,7 +53,9 @@ public class AccountRepository(string connectionString) : BaseAdoNetRepository(c
                 Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),
                 PasswordHash = reader.GetString(reader.GetOrdinal(nameof(Account.PasswordHash))),
                 Type = (AccountType)reader.GetInt32(reader.GetOrdinal(nameof(Account.Type))),
-                ContactDetailsId = reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
+                ContactDetailsId = reader.IsDBNull(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
+                    ? null
+                    : reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId))),
             });
         }
 

@@ -7,6 +7,114 @@ namespace CarDealership.Data.Repositories;
 
 public class OrderRepository(string connectionString) : BaseAdoNetRepository(connectionString), IOrderRepository
 {
+    public async Task<IEnumerable<Order>> GetAllAsync()
+    {
+        var orders = new List<Order>();
+
+        var sql =
+            @"SELECT
+                o.Id, 
+                o.AccountId,
+                account.FirstName,
+                account.LastName,
+                account.Email,
+                account.PasswordHash,
+                account.Type,
+                account.ContactDetailsId,
+                o.CarId, 
+                o.CreatedDate, 
+                o.OverallPrice, 
+                o.Status, 
+                o.StatusChangedDate, 
+                car.VIN, 
+                car.Price, 
+                car.ImageUrl, 
+                car.Color, 
+                car.Year, 
+                car.Status, 
+                car.TechnicalCharacteristicsId,
+                car.DealerId,
+                technicalCharacteristics.BodyType,
+                technicalCharacteristics.MaxSpeed, 
+                technicalCharacteristics.TransmissionType, 
+                technicalCharacteristics.FuelConsumption,
+                technicalCharacteristics.Power,
+                technicalCharacteristics.DrivetrainType,
+                technicalCharacteristics.EngineType,
+                technicalCharacteristics.ModelId,
+                model.Name,
+                model.Brand,
+                model.Class
+            FROM [Order] o
+            JOIN [Car] car ON car.Id = o.CarId
+            JOIN [TechnicalCharacteristics] technicalCharacteristics ON technicalCharacteristics.Id = car.TechnicalCharacteristicsId
+            JOIN [Model] model ON model.Id = technicalCharacteristics.ModelId
+            JOIN [Account] account ON account.Id = o.AccountId";
+
+        await using var command = new SqlCommand(sql, Connection);
+
+        await using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            orders.Add(new Order
+            {
+                Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.Id))),
+                AccountId = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                Account = new Account
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                    FirstName = reader.GetString(reader.GetOrdinal(nameof(Account.FirstName))),
+                    LastName = reader.GetString(reader.GetOrdinal(nameof(Account.LastName))),
+                    Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),
+                    PasswordHash = reader.GetString(reader.GetOrdinal(nameof(Account.PasswordHash))),
+                    Type = (AccountType)reader.GetInt32(reader.GetOrdinal(nameof(Account.Type))),
+                    ContactDetailsId = reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
+                },
+                CarId = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
+                Car = new Car
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
+                    DealerId = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId))),
+                    TechnicalCharacteristicsId =
+                        reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                    TechnicalCharacteristics = new TechnicalCharacteristics
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                        BodyType = (BodyType)reader.GetInt32(
+                            reader.GetOrdinal(nameof(TechnicalCharacteristics.BodyType))),
+                        MaxSpeed = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristics.MaxSpeed))),
+                        TransmissionType =
+                            (TransmissionType)reader.GetInt32(
+                                reader.GetOrdinal(nameof(TechnicalCharacteristics.TransmissionType))),
+                        FuelConsumption =
+                            reader.GetDecimal(reader.GetOrdinal(nameof(TechnicalCharacteristics.FuelConsumption))),
+                        Power = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.Power))),
+                        DrivetrainType =
+                            (DrivetrainType)reader.GetInt32(
+                                reader.GetOrdinal(nameof(TechnicalCharacteristics.DrivetrainType))),
+                        ModelId = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                        Model = new Model
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                            Name = reader.GetString(reader.GetOrdinal(nameof(Model.Name))),
+                            Brand = reader.GetString(reader.GetOrdinal(nameof(Model.Brand))),
+                            Class = reader.GetString(reader.GetOrdinal(nameof(Model.Class)))
+                        }
+                    }
+                },
+                CreatedDate = reader.GetDateTime(reader.GetOrdinal(nameof(Order.CreatedDate))),
+                OverallPrice = reader.GetDecimal(reader.GetOrdinal(nameof(Order.OverallPrice))),
+                Status = (OrderStatus)reader.GetInt32(reader.GetOrdinal(nameof(Order.Status))),
+                StatusChangedDate = reader.IsDBNull(reader.GetOrdinal(nameof(Order.StatusChangedDate)))
+                    ? null
+                    : reader.GetDateTime(reader.GetOrdinal(nameof(Order.StatusChangedDate)))
+            });
+        }
+
+        return orders;
+    }
+
     public async Task<IEnumerable<Order>> GetAllAsync(int accountId)
     {
         var orders = new List<Order>();
@@ -47,7 +155,7 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
 
         await using var command = new SqlCommand(sql, Connection);
         command.Parameters.AddWithValue("@accountId", accountId);
-        
+
         await using var reader = await command.ExecuteReaderAsync();
 
         while (await reader.ReadAsync())
@@ -61,19 +169,23 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
                 {
                     Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
                     DealerId = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId))),
-                    TechnicalCharacteristicsId = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                    TechnicalCharacteristicsId =
+                        reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
                     TechnicalCharacteristics = new TechnicalCharacteristics
                     {
                         Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
-                        BodyType = (BodyType)reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.BodyType))),
+                        BodyType = (BodyType)reader.GetInt32(
+                            reader.GetOrdinal(nameof(TechnicalCharacteristics.BodyType))),
                         MaxSpeed = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristics.MaxSpeed))),
                         TransmissionType =
-                            (TransmissionType)reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.TransmissionType))),
+                            (TransmissionType)reader.GetInt32(
+                                reader.GetOrdinal(nameof(TechnicalCharacteristics.TransmissionType))),
                         FuelConsumption =
                             reader.GetDecimal(reader.GetOrdinal(nameof(TechnicalCharacteristics.FuelConsumption))),
                         Power = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.Power))),
                         DrivetrainType =
-                            (DrivetrainType)reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.DrivetrainType))),
+                            (DrivetrainType)reader.GetInt32(
+                                reader.GetOrdinal(nameof(TechnicalCharacteristics.DrivetrainType))),
                         ModelId = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
                         Model = new Model
                         {
@@ -90,7 +202,6 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
                 StatusChangedDate = reader.IsDBNull(reader.GetOrdinal(nameof(Order.StatusChangedDate)))
                     ? null
                     : reader.GetDateTime(reader.GetOrdinal(nameof(Order.StatusChangedDate))),
-                
             });
         }
 
@@ -138,7 +249,7 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
     public async Task<decimal> GetOverallProfitAsync()
     {
         var sql = @"SELECT ISNULL(SUM([OverallPrice]), 0) FROM [Order] WHERE Status = 1";
-        
+
         await using var command = new SqlCommand(sql, Connection);
         var result = await command.ExecuteScalarAsync();
 

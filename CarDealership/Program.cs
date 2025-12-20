@@ -42,6 +42,7 @@ public class Program
                 services.AddTransient<RegistrationForm>();
                 services.AddTransient<UserCarsForm>();
                 services.AddTransient<UserOrdersForm>();
+                services.AddTransient<ManagerTablesForm>();
 
                 services.AddTransient<IFormNavigation, FormNavigation>();
                 services.AddTransient<IPasswordHasher, PasswordHasher>();

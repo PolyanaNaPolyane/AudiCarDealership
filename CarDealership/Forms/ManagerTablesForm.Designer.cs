@@ -141,42 +141,49 @@ partial class ManagerTablesForm
         modelsToolStripMenuItem.Name = "modelsToolStripMenuItem";
         modelsToolStripMenuItem.Size = new Size(262, 26);
         modelsToolStripMenuItem.Text = "Моделі";
+        modelsToolStripMenuItem.Click += modelsToolStripMenuItem_Click;
         // 
         // technicalCharacteristicsToolStripMenuItem
         // 
         technicalCharacteristicsToolStripMenuItem.Name = "technicalCharacteristicsToolStripMenuItem";
         technicalCharacteristicsToolStripMenuItem.Size = new Size(262, 26);
         technicalCharacteristicsToolStripMenuItem.Text = "Технічні характеристики";
+        technicalCharacteristicsToolStripMenuItem.Click += technicalCharacteristicsToolStripMenuItem_Click;
         // 
         // carsToolStripMenuItem
         // 
         carsToolStripMenuItem.Name = "carsToolStripMenuItem";
         carsToolStripMenuItem.Size = new Size(262, 26);
         carsToolStripMenuItem.Text = "Автомобілі";
+        carsToolStripMenuItem.Click += carsToolStripMenuItem_Click;
         // 
         // dealersToolStripMenuItem
         // 
         dealersToolStripMenuItem.Name = "dealersToolStripMenuItem";
         dealersToolStripMenuItem.Size = new Size(262, 26);
         dealersToolStripMenuItem.Text = "Дилери";
+        dealersToolStripMenuItem.Click += dealersToolStripMenuItem_Click;
         // 
         // accountsToolStripMenuItem
         // 
         accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
         accountsToolStripMenuItem.Size = new Size(262, 26);
         accountsToolStripMenuItem.Text = "Акаунти";
+        accountsToolStripMenuItem.Click += accountsToolStripMenuItem_Click;
         // 
         // ordersToolStripMenuItem
         // 
         ordersToolStripMenuItem.Name = "ordersToolStripMenuItem";
         ordersToolStripMenuItem.Size = new Size(262, 26);
         ordersToolStripMenuItem.Text = "Замовлення";
+        ordersToolStripMenuItem.Click += ordersToolStripMenuItem_Click;
         // 
         // contactDetailsToolStripMenuItem
         // 
         contactDetailsToolStripMenuItem.Name = "contactDetailsToolStripMenuItem";
         contactDetailsToolStripMenuItem.Size = new Size(262, 26);
         contactDetailsToolStripMenuItem.Text = "Контактні дані";
+        contactDetailsToolStripMenuItem.Click += contactDetailsToolStripMenuItem_Click;
         // 
         // tableLabel
         // 

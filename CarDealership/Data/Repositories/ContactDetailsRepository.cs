@@ -11,7 +11,7 @@ public class ContactDetailsRepository(string connectionString)
     {
         var contactDetails = new List<ContactDetails>();
 
-        var sql = "SELECT * FROM [Model]";
+        var sql = "SELECT * FROM [ContactDetails]";
 
         await using var command = new SqlCommand(sql, Connection);
         await using var reader = await command.ExecuteReaderAsync();

@@ -7,17 +7,23 @@ public partial class MainManagerForm : Form
 {
     private readonly ICarService _carService;
     private readonly IOrderService _orderService;
+    private readonly IFormNavigation _formNavigation;
     private readonly AccountContext _accountContext;
 
-    public MainManagerForm(ICarService carService, IOrderService orderService, AccountContext accountContext)
+    public MainManagerForm(
+        ICarService carService,
+        IOrderService orderService,
+        IFormNavigation formNavigation,
+        AccountContext accountContext)
     {
         InitializeComponent();
 
         _carService = carService;
         _orderService = orderService;
+        _formNavigation = formNavigation;
         _accountContext = accountContext;
 
-        accountLabel.Text = $"{_accountContext.CurrentAccount.FirstName} {_accountContext.CurrentAccount.LastName}";
+        //accountLabel.Text = $"{_accountContext.CurrentAccount.FirstName} {_accountContext.CurrentAccount.LastName}";
     }
 
     private async void MainManagerForm_Load(object sender, EventArgs e)
@@ -33,6 +39,6 @@ public partial class MainManagerForm : Form
 
     private void tablesToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
+        _formNavigation.NavigateTo<ManagerTablesForm>(this);
     }
 }

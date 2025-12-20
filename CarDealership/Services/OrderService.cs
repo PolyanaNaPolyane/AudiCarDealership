@@ -5,8 +5,14 @@ using CarDealership.Services.Interfaces;
 
 namespace CarDealership.Services;
 
-public class OrderService(IOrderRepository orderRepository, ICarRepository carRepository, AccountContext accountContext) : IOrderService
+public class OrderService(IOrderRepository orderRepository, ICarRepository carRepository, AccountContext accountContext)
+    : IOrderService
 {
+    public Task<IEnumerable<Order>> GetAllAsync()
+    {
+        return orderRepository.GetAllAsync();
+    }
+
     public Task<IEnumerable<Order>> GetAllByAccountAsync()
     {
         return orderRepository.GetAllAsync(accountContext.CurrentAccount.Id);

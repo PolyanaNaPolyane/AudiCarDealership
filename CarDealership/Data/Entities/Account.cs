@@ -11,6 +11,6 @@ public class Account : Entity
     public string PasswordHash { get; set; }
     public AccountType Type { get; set; }
     
-    public int ContactDetailsId { get; set; }
+    public int? ContactDetailsId { get; set; }
     public ContactDetails? ContactDetails { get; set; }
 }
