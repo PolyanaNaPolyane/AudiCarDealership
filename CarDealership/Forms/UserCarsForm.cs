@@ -156,12 +156,10 @@ public partial class UserCarsForm : Form
         carsTable.Columns.Add("Ціна", typeof(decimal));
         carsTable.Columns.Add("Колір", typeof(string));
         carsTable.Columns.Add("Рік випуску", typeof(int));
-        carsTable.Columns.Add("Статус", typeof(string));
 
         foreach (var car in cars)
         {
-            carsTable.Rows.Add(car.Id, car.TechnicalCharacteristics.Model.Name, car.Price, car.Color, car.Year,
-                car.Status.GetDisplayName());
+            carsTable.Rows.Add(car.Id, car.TechnicalCharacteristics.Model.Name, car.Price, car.Color, car.Year);
         }
 
         return carsTable;

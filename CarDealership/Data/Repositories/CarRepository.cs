@@ -66,6 +66,83 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         return result != null ? Convert.ToInt32(result) : 0;
     }
 
+    public async Task<IEnumerable<Car>> GetAllAsync()
+    {
+        var cars = new List<Car>();
+
+        var sql = @"
+            SELECT 
+                car.Id, 
+                car.VIN, 
+                car.Price, 
+                car.ImageUrl, 
+                car.Color, 
+                car.Year, 
+                car.Status, 
+                car.TechnicalCharacteristicsId, 
+                car.DealerId,
+                technicalCharacteristics.BodyType,
+                technicalCharacteristics.MaxSpeed, 
+                technicalCharacteristics.TransmissionType, 
+                technicalCharacteristics.FuelConsumption,
+                technicalCharacteristics.Power,
+                technicalCharacteristics.DrivetrainType,
+                technicalCharacteristics.EngineType,
+                technicalCharacteristics.ModelId,
+                model.Name,
+                model.Brand,
+                model.Class
+            FROM [Car] car
+            JOIN [TechnicalCharacteristics] technicalCharacteristics ON technicalCharacteristics.Id = car.TechnicalCharacteristicsId
+            JOIN [Model] model ON model.Id = technicalCharacteristics.ModelId";
+
+        await using var command = new SqlCommand(sql, Connection);
+        await using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            cars.Add(new Car
+            {
+                Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.Id))),
+                VIN = reader.GetGuid(reader.GetOrdinal(nameof(Car.VIN))),
+                Price = reader.GetDecimal(reader.GetOrdinal(nameof(Car.Price))),
+                ImageUrl = reader.GetString(reader.GetOrdinal(nameof(Car.ImageUrl))),
+                Color = reader.GetString(reader.GetOrdinal(nameof(Car.Color))),
+                Year = reader.GetInt32(reader.GetOrdinal(nameof(Car.Year))),
+                Status = (CarStatus)reader.GetInt32(reader.GetOrdinal(nameof(Car.Status))),
+                TechnicalCharacteristicsId = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                TechnicalCharacteristics = new TechnicalCharacteristics
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                    BodyType = (BodyType)reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.BodyType))),
+                    MaxSpeed = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristics.MaxSpeed))),
+                    TransmissionType =
+                        (TransmissionType)reader.GetInt32(
+                            reader.GetOrdinal(nameof(TechnicalCharacteristics.TransmissionType))),
+                    FuelConsumption =
+                        reader.GetDecimal(reader.GetOrdinal(nameof(TechnicalCharacteristics.FuelConsumption))),
+                    Power = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.Power))),
+                    DrivetrainType =
+                        (DrivetrainType)reader.GetInt32(
+                            reader.GetOrdinal(nameof(TechnicalCharacteristics.DrivetrainType))),
+                    EngineType =
+                        (EngineType)reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.EngineType))),
+                    ModelId = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                    Model = new Model
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                        Name = reader.GetString(reader.GetOrdinal(nameof(Model.Name))),
+                        Brand = reader.GetString(reader.GetOrdinal(nameof(Model.Brand))),
+                        Class = reader.GetString(reader.GetOrdinal(nameof(Model.Class))),
+                    }
+                },
+                DealerId = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId)))
+            });
+        }
+
+        return cars;
+    }
+
     public async Task<IEnumerable<Car>> GetAvaliableAllAsync()
     {
         var cars = new List<Car>();

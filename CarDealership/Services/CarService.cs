@@ -7,6 +7,11 @@ namespace CarDealership.Services;
 
 public class CarService(ICarRepository carRepository) : ICarService
 {
+    public Task<IEnumerable<Car>> GetAllAsync()
+    {
+        return carRepository.GetAllAsync();
+    }
+    
     public Task<IEnumerable<Car>> GetAllAvailableAsync()
     {
         return carRepository.GetAvaliableAllAsync();

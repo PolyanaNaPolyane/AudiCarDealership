@@ -4,6 +4,7 @@ namespace CarDealership.Services.Interfaces;
 
 public interface ICarService
 {
+    Task<IEnumerable<Car>> GetAllAsync();
     Task<IEnumerable<Car>> GetAllAvailableAsync();
 
     Task<int> GetAvailableByAllDealersAsync();
