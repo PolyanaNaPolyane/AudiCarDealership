@@ -48,6 +48,10 @@ public class Program
                 services.AddTransient<IAccountService, AccountService>();
                 services.AddTransient<ICarService, CarService>();
                 services.AddTransient<IOrderService, OrderService>();
+                services.AddTransient<IDealerService, DealerService>();
+                services.AddTransient<IContactDetailsService, ContactDetailsService>();
+                services.AddTransient<IModelService, ModelService>();
+                services.AddTransient<ITechnicalCharacteristicsService, TechnicalCharacteristicsService>();
 
                 services.AddTransient<IAccountRepository, AccountRepository>(serviceProvider =>
                     new AccountRepository(connectionString));
