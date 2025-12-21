@@ -47,6 +47,10 @@ partial class ManagerTablesForm
         accountsToolStripMenuItem = new ToolStripMenuItem();
         ordersToolStripMenuItem = new ToolStripMenuItem();
         contactDetailsToolStripMenuItem = new ToolStripMenuItem();
+        actionsToolStripMenuItem = new ToolStripMenuItem();
+        addToolStripMenuItem = new ToolStripMenuItem();
+        deleteToolStripMenuItem = new ToolStripMenuItem();
+        editToolStripMenuItem = new ToolStripMenuItem();
         tableLabel = new Label();
         filterGroupBox.SuspendLayout();
         searchGroupBox.SuspendLayout();
@@ -58,18 +62,18 @@ partial class ManagerTablesForm
         // 
         filterGroupBox.Controls.Add(resetButton);
         filterGroupBox.Controls.Add(applyButton);
-        filterGroupBox.Location = new Point(373, 31);
+        filterGroupBox.Location = new Point(309, 31);
         filterGroupBox.Name = "filterGroupBox";
-        filterGroupBox.Size = new Size(309, 65);
+        filterGroupBox.Size = new Size(263, 65);
         filterGroupBox.TabIndex = 8;
         filterGroupBox.TabStop = false;
         filterGroupBox.Text = "Фільтрація";
         // 
         // resetButton
         // 
-        resetButton.Location = new Point(173, 26);
+        resetButton.Location = new Point(146, 25);
         resetButton.Name = "resetButton";
-        resetButton.Size = new Size(127, 29);
+        resetButton.Size = new Size(108, 29);
         resetButton.TabIndex = 1;
         resetButton.Text = "Зняти фільтр";
         resetButton.UseVisualStyleBackColor = true;
@@ -78,7 +82,7 @@ partial class ManagerTablesForm
         // 
         applyButton.Location = new Point(6, 26);
         applyButton.Name = "applyButton";
-        applyButton.Size = new Size(161, 29);
+        applyButton.Size = new Size(134, 29);
         applyButton.TabIndex = 0;
         applyButton.Text = "Накласти фільтр";
         applyButton.UseVisualStyleBackColor = true;
@@ -89,14 +93,14 @@ partial class ManagerTablesForm
         searchGroupBox.Controls.Add(searchTextBox);
         searchGroupBox.Location = new Point(12, 31);
         searchGroupBox.Name = "searchGroupBox";
-        searchGroupBox.Size = new Size(355, 65);
+        searchGroupBox.Size = new Size(291, 65);
         searchGroupBox.TabIndex = 7;
         searchGroupBox.TabStop = false;
         searchGroupBox.Text = "Пошук";
         // 
         // searchButton
         // 
-        searchButton.Location = new Point(255, 25);
+        searchButton.Location = new Point(185, 26);
         searchButton.Name = "searchButton";
         searchButton.Size = new Size(94, 29);
         searchButton.TabIndex = 5;
@@ -107,7 +111,7 @@ partial class ManagerTablesForm
         // 
         searchTextBox.Location = new Point(6, 26);
         searchTextBox.Name = "searchTextBox";
-        searchTextBox.Size = new Size(243, 27);
+        searchTextBox.Size = new Size(173, 27);
         searchTextBox.TabIndex = 5;
         // 
         // dataGridView
@@ -116,18 +120,18 @@ partial class ManagerTablesForm
         dataGridView.Location = new Point(12, 127);
         dataGridView.Name = "dataGridView";
         dataGridView.RowHeadersWidth = 51;
-        dataGridView.Size = new Size(670, 198);
+        dataGridView.Size = new Size(560, 198);
         dataGridView.TabIndex = 6;
         // 
         // menuStrip1
         // 
         menuStrip1.ImageScalingSize = new Size(20, 20);
-        menuStrip1.Items.AddRange(new ToolStripItem[] { tablesToolStripMenuItem });
+        menuStrip1.Items.AddRange(new ToolStripItem[] { tablesToolStripMenuItem, actionsToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(800, 28);
+        menuStrip1.Size = new Size(585, 28);
         menuStrip1.TabIndex = 9;
-        menuStrip1.Text = "menuStrip1";
+        menuStrip1.Text = "menuStrip";
         // 
         // tablesToolStripMenuItem
         // 
@@ -185,6 +189,34 @@ partial class ManagerTablesForm
         contactDetailsToolStripMenuItem.Text = "Контактні дані";
         contactDetailsToolStripMenuItem.Click += contactDetailsToolStripMenuItem_Click;
         // 
+        // actionsToolStripMenuItem
+        // 
+        actionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, editToolStripMenuItem });
+        actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+        actionsToolStripMenuItem.Size = new Size(41, 24);
+        actionsToolStripMenuItem.Text = "Дії";
+        // 
+        // addToolStripMenuItem
+        // 
+        addToolStripMenuItem.Name = "addToolStripMenuItem";
+        addToolStripMenuItem.Size = new Size(224, 26);
+        addToolStripMenuItem.Text = "Додати";
+        addToolStripMenuItem.Click += addToolStripMenuItem_Click;
+        // 
+        // deleteToolStripMenuItem
+        // 
+        deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+        deleteToolStripMenuItem.Size = new Size(224, 26);
+        deleteToolStripMenuItem.Text = "Видалити";
+        deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+        // 
+        // editToolStripMenuItem
+        // 
+        editToolStripMenuItem.Name = "editToolStripMenuItem";
+        editToolStripMenuItem.Size = new Size(224, 26);
+        editToolStripMenuItem.Text = "Редагувати";
+        editToolStripMenuItem.Click += editToolStripMenuItem_Click;
+        // 
         // tableLabel
         // 
         tableLabel.AutoSize = true;
@@ -198,7 +230,7 @@ partial class ManagerTablesForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
+        ClientSize = new Size(585, 337);
         Controls.Add(tableLabel);
         Controls.Add(filterGroupBox);
         Controls.Add(searchGroupBox);
@@ -237,4 +269,8 @@ partial class ManagerTablesForm
     private ToolStripMenuItem ordersToolStripMenuItem;
     private ToolStripMenuItem contactDetailsToolStripMenuItem;
     private Label tableLabel;
+    private ToolStripMenuItem actionsToolStripMenuItem;
+    private ToolStripMenuItem addToolStripMenuItem;
+    private ToolStripMenuItem deleteToolStripMenuItem;
+    private ToolStripMenuItem editToolStripMenuItem;
 }

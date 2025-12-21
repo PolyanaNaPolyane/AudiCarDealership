@@ -57,6 +57,7 @@ public partial class ManagerTablesForm : Form
     private async void ManagerTablesForm_Load(object sender, EventArgs e)
     {
         tableLabel.Text = "Моделі";
+        actionsToolStripMenuItem.Visible = false;
         await LoadModelsAsync();
     }
 
@@ -246,42 +247,64 @@ public partial class ManagerTablesForm : Form
     private async void modelsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Моделі";
+        actionsToolStripMenuItem.Visible = false;
         await LoadModelsAsync();
     }
 
     private async void technicalCharacteristicsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Технічні характеристики";
+        actionsToolStripMenuItem.Visible = false;
         await LoadTechnicalCharacteristicsAsync();
     }
 
     private async void carsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Автомобілі";
+        actionsToolStripMenuItem.Visible = true;
         await LoadCarsAsync();
     }
 
     private async void dealersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Дилери";
+        actionsToolStripMenuItem.Visible = false;
         await LoadDealersAsync();
     }
 
     private async void accountsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Акаунти";
+        actionsToolStripMenuItem.Visible = false;
         await LoadAccountsAsync();
     }
 
     private async void ordersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Замовлення";
+        actionsToolStripMenuItem.Visible = true;
         await LoadOrdersAsync();
     }
 
     private async void contactDetailsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Контакні дані";
+        actionsToolStripMenuItem.Visible = false;
         await LoadContactDetailsAsync();
+    }
+
+    private void addToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void editToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+
     }
 }

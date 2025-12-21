@@ -46,7 +46,7 @@ public partial class MainCustomerForm : Form
 
     private async void deleteAccountToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var choice = MessageUtil.ShowInformation("Ви впевнені, що хочете продовжити видалення акаунта, при цьому усі незавершені замовлення також будуть видалені?");
+        var choice = MessageBox.Show("Ви впевнені, що хочете продовжити видалення акаунта, при цьому усі незавершені замовлення також будуть видалені?", "Інформація", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
         if (choice == DialogResult.OK)
         {
