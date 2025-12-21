@@ -265,4 +265,14 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
 
         await command.ExecuteNonQueryAsync();
     }
+
+    public async Task DeleteAsync(int id)
+    {
+        var sql = "DELETE FROM [Order] WHERE Id = @id AND Status != 1";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@id", id);
+
+        await command.ExecuteNonQueryAsync();
+    }
 }
