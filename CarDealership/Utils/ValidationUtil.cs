@@ -164,4 +164,40 @@ public static class ValidationUtil
         message = null;
         return true;
     }
+    
+    public static bool IsValidAccount(this ComboBox comboBox, out string message)
+    {
+        if (comboBox.SelectedIndex < 0)
+        {
+            message = "Оберіть акаунт з випадаючого списка";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
+    
+    public static bool IsValidCar(this ComboBox comboBox, out string message)
+    {
+        if (comboBox.SelectedIndex < 0)
+        {
+            message = "Оберіть машину з випадаючого списка";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
+    
+    public static bool IsValidOverallPrice(this TextBox textBox, out string message)
+    {
+        if (!decimal.TryParse(textBox.Text, out var overallPrice) || overallPrice <= 0)
+        {
+            message = "Загальна ціна повинна бути більшою 0";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
 }

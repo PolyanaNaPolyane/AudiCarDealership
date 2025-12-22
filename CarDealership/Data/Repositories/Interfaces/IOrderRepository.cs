@@ -12,4 +12,5 @@ public interface IOrderRepository
     Task<decimal> GetOverallProfitAsync();
     Task DeleteByAccountAsync(int accountId);
     Task DeleteAsync(int id);
+    Task UpdateAsync(Order order);
 }

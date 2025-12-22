@@ -36,6 +36,11 @@ public class OrderService(IOrderRepository orderRepository, ICarRepository carRe
         await carRepository.ChangeStatus(car.Id, CarStatus.Sold);
     }
 
+    public Task UpdateAsync(Order order)
+    {
+        return orderRepository.UpdateAsync(order);
+    }
+
     public Task DeleteAsync(int id)
     {
         return orderRepository.DeleteAsync(id);

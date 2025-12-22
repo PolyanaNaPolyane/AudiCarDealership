@@ -275,4 +275,26 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
 
         await command.ExecuteNonQueryAsync();
     }
+
+    public async Task UpdateAsync(Order order)
+    {
+        var sql = @"
+            UPDATE [Order] 
+            SET AccountId = @AccountId,
+                CarId = @CarId,
+                OverallPrice = @OverallPrice,
+                Status = @Status,
+                StatusChangedDate = @StatusChangedDate
+            WHERE Id = @Id";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@AccountId", order.AccountId);
+        command.Parameters.AddWithValue("@CarId", order.CarId);
+        command.Parameters.AddWithValue("@OverallPrice", order.OverallPrice);
+        command.Parameters.AddWithValue("@Status", (int)order.Status);
+        command.Parameters.AddWithValue("@StatusChangedDate", DateTime.Now);
+        command.Parameters.AddWithValue("@Id", order.Id);
+
+        await command.ExecuteNonQueryAsync();
+    }
 }
