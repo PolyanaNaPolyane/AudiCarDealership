@@ -317,9 +317,27 @@ public partial class ManagerTablesForm : Form
 
     }
 
-    private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+    private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        var selectedRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
+        var selectedRow = selectedRowView.Row;
+        
+        switch (tableLabel.Text)
+        {
+            case "Змовлення":
+                var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
 
+                if (selectedOrder.Status != OrderStatus.Pending)
+                {
+                    MessageUtil.ShowError("Неможливо видалити замовлення");
+                    return;
+                }
+                
+                await _orderService.DeleteAsync(selectedOrder.Id);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     private void editToolStripMenuItem_Click(object sender, EventArgs e)
