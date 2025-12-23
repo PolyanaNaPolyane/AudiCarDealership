@@ -17,4 +17,6 @@ public class Car : Entity
     
     public int DealerId { get; set; }
     public Dealer? Dealer { get; set; }
+
+    public string ModelName => TechnicalCharacteristics?.Model?.Name;
 }

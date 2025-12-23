@@ -8,6 +8,7 @@ public interface IOrderService
     Task<IEnumerable<Order>> GetAllByAccountAsync();
     Task<decimal> GetOverallProfitAsync();
     Task AddAsync(Car car);
+    Task AddAsync(Order order);
     Task UpdateAsync(Order order);
     Task DeleteAsync(int id);
 }

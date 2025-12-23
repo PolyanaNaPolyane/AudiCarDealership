@@ -17,7 +17,7 @@ public partial class ManagerTablesForm : Form
     private readonly IContactDetailsService _contactDetailsService;
 
     private readonly BindingSource _data = new();
-    
+
     private IEnumerable<Order> _allOrders = [];
 
     private CarsFilter _carsFilter = new()
@@ -61,8 +61,6 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Моделі";
         actionsToolStripMenuItem.Visible = false;
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         await LoadModelsAsync();
     }
 
@@ -253,8 +251,6 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Моделі";
         actionsToolStripMenuItem.Visible = false;
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         await LoadModelsAsync();
     }
 
@@ -262,8 +258,6 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Технічні характеристики";
         actionsToolStripMenuItem.Visible = false;
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         await LoadTechnicalCharacteristicsAsync();
     }
 
@@ -271,8 +265,6 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Автомобілі";
         actionsToolStripMenuItem.Visible = true;
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         await LoadCarsAsync();
     }
 
@@ -280,8 +272,6 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Дилери";
         actionsToolStripMenuItem.Visible = false;
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         await LoadDealersAsync();
     }
 
@@ -289,8 +279,6 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Акаунти";
         actionsToolStripMenuItem.Visible = false;
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         await LoadAccountsAsync();
     }
 
@@ -298,30 +286,32 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Замовлення";
         actionsToolStripMenuItem.Visible = true;
-        approveToolStripMenuItem.Visible = true;
-        rejectToolStripMenuItem.Visible = true;
         await LoadOrdersAsync();
     }
 
     private async void contactDetailsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Контакні дані";
-        approveToolStripMenuItem.Visible = false;
-        rejectToolStripMenuItem.Visible = false;
         actionsToolStripMenuItem.Visible = false;
         await LoadContactDetailsAsync();
     }
 
     private void addToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
+        switch (tableLabel.Text)
+        {
+            case "Замовлення":
+                var updateOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService);
+                updateOrderForm.ShowDialog();
+                break;
+        }
     }
 
     private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var selectedRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
         var selectedRow = selectedRowView.Row;
-        
+
         switch (tableLabel.Text)
         {
             case "Змовлення":
@@ -332,7 +322,7 @@ public partial class ManagerTablesForm : Form
                     MessageUtil.ShowError("Неможливо видалити замовлення");
                     return;
                 }
-                
+
                 await _orderService.DeleteAsync(selectedOrder.Id);
                 await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Available);
                 break;
@@ -343,54 +333,16 @@ public partial class ManagerTablesForm : Form
 
     private void editToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
-    }
-
-    private async void approveToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        if (tableLabel.Text != "Замовлення")
-        {
-            MessageUtil.ShowError("Оберіть таблицю замовлень");
-            return;
-        }
-        
         var selectedRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
         var selectedRow = selectedRowView.Row;
-        var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
 
-        if (selectedOrder.Status != OrderStatus.Pending)
+        switch (tableLabel.Text)
         {
-            MessageUtil.ShowError("Неможливо підтвердити замовлення");
-            return;
+            case "Замовлення":
+                var orderToUpdate = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
+                var updateOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService, orderToUpdate);
+                updateOrderForm.ShowDialog();
+                break;
         }
-        
-        selectedOrder.Status = OrderStatus.Approved;
-        selectedOrder.StatusChangedDate = DateTime.Now;
-        await _orderService.UpdateAsync(selectedOrder);
-        await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Sold);
-    }
-
-    private async void rejectToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        if (tableLabel.Text != "Замовлення")
-        {
-            MessageUtil.ShowError("Оберіть таблицю замовлень");
-            return;
-        }
-        
-        var selectedRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
-        var selectedRow = selectedRowView.Row;
-        var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
-        
-        if (selectedOrder.Status != OrderStatus.Pending)
-        {
-            MessageUtil.ShowError("Неможливо підтвердити замовлення");
-            return;
-        }
-        
-        selectedOrder.Status = OrderStatus.Rejected;
-        selectedOrder.StatusChangedDate = DateTime.Now;
-        await _orderService.UpdateAsync(selectedOrder);
-        await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Available);
     }
 }

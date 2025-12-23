@@ -23,6 +23,11 @@ public class OrderService(IOrderRepository orderRepository, ICarRepository carRe
         return orderRepository.GetOverallProfitAsync();
     }
 
+    public Task AddAsync(Order order)
+    {
+        return orderRepository.AddAsync(order);
+    }
+
     public async Task AddAsync(Car car)
     {
         await orderRepository.AddAsync(new Order
