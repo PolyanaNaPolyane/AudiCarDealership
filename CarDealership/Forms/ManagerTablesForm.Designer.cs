@@ -51,6 +51,8 @@ partial class ManagerTablesForm
         addToolStripMenuItem = new ToolStripMenuItem();
         deleteToolStripMenuItem = new ToolStripMenuItem();
         editToolStripMenuItem = new ToolStripMenuItem();
+        approveToolStripMenuItem = new ToolStripMenuItem();
+        rejectToolStripMenuItem = new ToolStripMenuItem();
         tableLabel = new Label();
         filterGroupBox.SuspendLayout();
         searchGroupBox.SuspendLayout();
@@ -191,7 +193,7 @@ partial class ManagerTablesForm
         // 
         // actionsToolStripMenuItem
         // 
-        actionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, editToolStripMenuItem });
+        actionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, editToolStripMenuItem, approveToolStripMenuItem, rejectToolStripMenuItem });
         actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
         actionsToolStripMenuItem.Size = new Size(41, 24);
         actionsToolStripMenuItem.Text = "Дії";
@@ -216,6 +218,20 @@ partial class ManagerTablesForm
         editToolStripMenuItem.Size = new Size(224, 26);
         editToolStripMenuItem.Text = "Редагувати";
         editToolStripMenuItem.Click += editToolStripMenuItem_Click;
+        // 
+        // approveToolStripMenuItem
+        // 
+        approveToolStripMenuItem.Name = "approveToolStripMenuItem";
+        approveToolStripMenuItem.Size = new Size(224, 26);
+        approveToolStripMenuItem.Text = "Підтвердити";
+        approveToolStripMenuItem.Click += approveToolStripMenuItem_Click;
+        // 
+        // rejectToolStripMenuItem
+        // 
+        rejectToolStripMenuItem.Name = "rejectToolStripMenuItem";
+        rejectToolStripMenuItem.Size = new Size(224, 26);
+        rejectToolStripMenuItem.Text = "Відхилити";
+        rejectToolStripMenuItem.Click += rejectToolStripMenuItem_Click;
         // 
         // tableLabel
         // 
@@ -273,4 +289,6 @@ partial class ManagerTablesForm
     private ToolStripMenuItem addToolStripMenuItem;
     private ToolStripMenuItem deleteToolStripMenuItem;
     private ToolStripMenuItem editToolStripMenuItem;
+    private ToolStripMenuItem approveToolStripMenuItem;
+    private ToolStripMenuItem rejectToolStripMenuItem;
 }
