@@ -33,7 +33,7 @@ public class OrderService(IOrderRepository orderRepository, ICarRepository carRe
             Status = OrderStatus.Pending
         });
 
-        await carRepository.ChangeStatus(car.Id, CarStatus.Sold);
+        await carRepository.ChangeStatusAsync(car.Id, CarStatus.Reserved);
     }
 
     public Task UpdateAsync(Order order)

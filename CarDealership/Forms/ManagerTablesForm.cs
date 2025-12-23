@@ -334,6 +334,7 @@ public partial class ManagerTablesForm : Form
                 }
                 
                 await _orderService.DeleteAsync(selectedOrder.Id);
+                await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Available);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -366,6 +367,7 @@ public partial class ManagerTablesForm : Form
         selectedOrder.Status = OrderStatus.Approved;
         selectedOrder.StatusChangedDate = DateTime.Now;
         await _orderService.UpdateAsync(selectedOrder);
+        await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Sold);
     }
 
     private async void rejectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -389,5 +391,6 @@ public partial class ManagerTablesForm : Form
         selectedOrder.Status = OrderStatus.Rejected;
         selectedOrder.StatusChangedDate = DateTime.Now;
         await _orderService.UpdateAsync(selectedOrder);
+        await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Available);
     }
 }

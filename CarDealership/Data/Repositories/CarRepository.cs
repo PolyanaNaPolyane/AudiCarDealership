@@ -7,7 +7,7 @@ namespace CarDealership.Data.Repositories;
 
 public class CarRepository(string connectionString) : BaseAdoNetRepository(connectionString), ICarRepository
 {
-    public async Task ChangeStatus(int id, CarStatus status)
+    public async Task ChangeStatusAsync(int id, CarStatus status)
     {
         var sql = "UPDATE [Car] SET Status = @status WHERE Id = @id";
 

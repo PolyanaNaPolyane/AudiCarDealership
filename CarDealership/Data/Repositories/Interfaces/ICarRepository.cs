@@ -8,7 +8,7 @@ public interface ICarRepository
     Task<IEnumerable<Car>> GetAllAsync();
     Task<IEnumerable<Car>> GetAvaliableAllAsync();
 
-    Task ChangeStatus(int id, CarStatus status);
+    Task ChangeStatusAsync(int id, CarStatus status);
 
     Task<int> GetAvailableCountAsync();
 

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using CarDealership.Data.Entities;
 using CarDealership.Data.Repositories.Interfaces;
+using CarDealership.Enums;
 using CarDealership.Services.Interfaces;
 
 namespace CarDealership.Services;
@@ -25,6 +26,11 @@ public class CarService(ICarRepository carRepository) : ICarService
     public Task<IEnumerable<string>> GetMostPopularModelsAsync()
     {
         return carRepository.GetMostPopularModelsAsync();
+    }
+
+    public Task ChangeStatusAsync(int id, CarStatus status)
+    {
+        return carRepository.ChangeStatusAsync(id, status);
     }
 
     // public Task AddAsync(Car car)
