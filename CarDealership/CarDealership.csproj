@@ -49,6 +49,9 @@
       <Compile Update="Forms\UpsertOrderForm.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Forms\UpsertCarForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
 </Project>
