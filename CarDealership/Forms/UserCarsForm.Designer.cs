@@ -160,7 +160,7 @@ partial class UserCarsForm
         Controls.Add(carsDataGridView);
         Controls.Add(menuStrip1);
         Name = "UserCarsForm";
-        Text = "UserCarsForm";
+        Text = "Автомобілі";
         Load += CarsForm_Load;
         ((ISupportInitialize)carsBindingSource).EndInit();
         ((ISupportInitialize)carsDataGridView).EndInit();

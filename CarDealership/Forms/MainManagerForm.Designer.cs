@@ -188,7 +188,7 @@ partial class MainManagerForm
         Controls.Add(menuStrip1);
         MainMenuStrip = menuStrip1;
         Name = "MainManagerForm";
-        Text = "MainManagerForm";
+        Text = "Головне меню менеджера";
         Load += MainManagerForm_Load;
         statisticsGroupBox.ResumeLayout(false);
         overallProfitGroupBox.ResumeLayout(false);

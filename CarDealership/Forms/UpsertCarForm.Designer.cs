@@ -227,7 +227,6 @@ partial class UpsertCarForm
         Controls.Add(priceLabel);
         Controls.Add(vinLabel);
         Name = "UpsertCarForm";
-        Text = "UpsertCarForm";
         Load += UpsertCarForm_Load;
         ResumeLayout(false);
         PerformLayout();

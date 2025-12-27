@@ -35,7 +35,6 @@ public class Program
 
                 services.AddSingleton<AccountContext>();
 
-                services.AddTransient<MainForm>();
                 services.AddTransient<LoginForm>();
                 services.AddTransient<MainCustomerForm>();
                 services.AddTransient<MainManagerForm>();

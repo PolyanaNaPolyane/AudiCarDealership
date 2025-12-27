@@ -166,7 +166,6 @@ partial class UpsertOrderForm
         Controls.Add(carLabel);
         Controls.Add(accountLabel);
         Name = "UpsertOrderForm";
-        Text = "UpsertOrderForm";
         Load += UpsertOrderForm_Load;
         ResumeLayout(false);
         PerformLayout();

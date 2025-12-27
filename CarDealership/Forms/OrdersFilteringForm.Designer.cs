@@ -123,7 +123,7 @@
             Controls.Add(statusGroupBox);
             Controls.Add(priceGroupBox);
             Name = "OrdersFilteringForm";
-            Text = "OrdersFilteringForm";
+            Text = "Фільтрація замовлень";
             priceGroupBox.ResumeLayout(false);
             priceGroupBox.PerformLayout();
             statusGroupBox.ResumeLayout(false);

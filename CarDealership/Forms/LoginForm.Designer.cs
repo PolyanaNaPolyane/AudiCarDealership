@@ -39,9 +39,9 @@ partial class LoginForm
         // 
         // loginButton
         // 
-        loginButton.Location = new Point(59, 104);
+        loginButton.Location = new Point(33, 110);
         loginButton.Name = "loginButton";
-        loginButton.Size = new Size(93, 37);
+        loginButton.Size = new Size(146, 37);
         loginButton.TabIndex = 0;
         loginButton.Text = "Увійти";
         loginButton.UseVisualStyleBackColor = true;
@@ -63,9 +63,9 @@ partial class LoginForm
         // 
         // registerButton
         // 
-        registerButton.Location = new Point(58, 160);
+        registerButton.Location = new Point(33, 153);
         registerButton.Name = "registerButton";
-        registerButton.Size = new Size(94, 29);
+        registerButton.Size = new Size(146, 36);
         registerButton.TabIndex = 3;
         registerButton.Text = "Зареєструватися";
         registerButton.UseVisualStyleBackColor = true;

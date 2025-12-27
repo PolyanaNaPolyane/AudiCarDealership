@@ -199,21 +199,21 @@ partial class ManagerTablesForm
         // addToolStripMenuItem
         // 
         addToolStripMenuItem.Name = "addToolStripMenuItem";
-        addToolStripMenuItem.Size = new Size(224, 26);
+        addToolStripMenuItem.Size = new Size(168, 26);
         addToolStripMenuItem.Text = "Додати";
         addToolStripMenuItem.Click += addToolStripMenuItem_Click;
         // 
         // deleteToolStripMenuItem
         // 
         deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-        deleteToolStripMenuItem.Size = new Size(224, 26);
+        deleteToolStripMenuItem.Size = new Size(168, 26);
         deleteToolStripMenuItem.Text = "Видалити";
         deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
         // 
         // editToolStripMenuItem
         // 
         editToolStripMenuItem.Name = "editToolStripMenuItem";
-        editToolStripMenuItem.Size = new Size(224, 26);
+        editToolStripMenuItem.Size = new Size(168, 26);
         editToolStripMenuItem.Text = "Редагувати";
         editToolStripMenuItem.Click += editToolStripMenuItem_Click;
         // 
@@ -238,7 +238,7 @@ partial class ManagerTablesForm
         Controls.Add(menuStrip1);
         MainMenuStrip = menuStrip1;
         Name = "ManagerTablesForm";
-        Text = "ManagerTablesForm";
+        Text = "Управління таблицями";
         Load += ManagerTablesForm_Load;
         filterGroupBox.ResumeLayout(false);
         searchGroupBox.ResumeLayout(false);

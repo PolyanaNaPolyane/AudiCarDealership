@@ -219,9 +219,9 @@ partial class RegistrationForm
         // 
         // registerButton
         // 
-        registerButton.Location = new Point(71, 374);
+        registerButton.Location = new Point(71, 385);
         registerButton.Name = "registerButton";
-        registerButton.Size = new Size(140, 29);
+        registerButton.Size = new Size(140, 38);
         registerButton.TabIndex = 2;
         registerButton.Text = "Зареєструватися";
         registerButton.UseVisualStyleBackColor = true;
@@ -229,9 +229,9 @@ partial class RegistrationForm
         // 
         // loginButton
         // 
-        loginButton.Location = new Point(89, 418);
+        loginButton.Location = new Point(71, 429);
         loginButton.Name = "loginButton";
-        loginButton.Size = new Size(94, 29);
+        loginButton.Size = new Size(140, 35);
         loginButton.TabIndex = 3;
         loginButton.Text = "Увійти";
         loginButton.UseVisualStyleBackColor = true;
@@ -247,7 +247,7 @@ partial class RegistrationForm
         Controls.Add(generalGroupBox);
         Controls.Add(contactDetailsGroupBox);
         Name = "RegistrationForm";
-        Text = "RegistrationForm";
+        Text = "Регістрація";
         contactDetailsGroupBox.ResumeLayout(false);
         contactDetailsGroupBox.PerformLayout();
         generalGroupBox.ResumeLayout(false);

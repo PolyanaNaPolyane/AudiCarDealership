@@ -383,7 +383,7 @@ partial class CarDetailsForm
         Controls.Add(generalGroupBox);
         Controls.Add(exportButton);
         Name = "CarDetailsForm";
-        Text = "CarDetailsForm";
+        Text = "Деталі автомобіля";
         generalGroupBox.ResumeLayout(false);
         generalGroupBox.PerformLayout();
         technicalCharacteristicsGroupBox.ResumeLayout(false);

@@ -40,11 +40,11 @@ partial class CarsFilteringForm
         colorGroupBox = new GroupBox();
         priceGroupBox = new GroupBox();
         bodyTypeGroupBox = new GroupBox();
+        bodyTypeCheckedListBox = new CheckedListBox();
         engineTypeGroupBox = new GroupBox();
+        engineCheckedListBox = new CheckedListBox();
         transmissionTypeGroupBox = new GroupBox();
         transmissionCheckedListBox = new CheckedListBox();
-        engineCheckedListBox = new CheckedListBox();
-        bodyTypeCheckedListBox = new CheckedListBox();
         colorGroupBox.SuspendLayout();
         priceGroupBox.SuspendLayout();
         bodyTypeGroupBox.SuspendLayout();
@@ -136,6 +136,15 @@ partial class CarsFilteringForm
         bodyTypeGroupBox.TabStop = false;
         bodyTypeGroupBox.Text = "Тип кузова";
         // 
+        // bodyTypeCheckedListBox
+        // 
+        bodyTypeCheckedListBox.FormattingEnabled = true;
+        bodyTypeCheckedListBox.Items.AddRange(new object[] { "Седан", "Хетчбек", "Купе" });
+        bodyTypeCheckedListBox.Location = new Point(18, 26);
+        bodyTypeCheckedListBox.Name = "bodyTypeCheckedListBox";
+        bodyTypeCheckedListBox.Size = new Size(147, 70);
+        bodyTypeCheckedListBox.TabIndex = 11;
+        // 
         // engineTypeGroupBox
         // 
         engineTypeGroupBox.Controls.Add(engineCheckedListBox);
@@ -145,6 +154,15 @@ partial class CarsFilteringForm
         engineTypeGroupBox.TabIndex = 9;
         engineTypeGroupBox.TabStop = false;
         engineTypeGroupBox.Text = "Тип двигуна";
+        // 
+        // engineCheckedListBox
+        // 
+        engineCheckedListBox.FormattingEnabled = true;
+        engineCheckedListBox.Items.AddRange(new object[] { "Дизельний", "Бензиновий", "Електричний", "Гібридний" });
+        engineCheckedListBox.Location = new Point(19, 26);
+        engineCheckedListBox.Name = "engineCheckedListBox";
+        engineCheckedListBox.Size = new Size(150, 92);
+        engineCheckedListBox.TabIndex = 0;
         // 
         // transmissionTypeGroupBox
         // 
@@ -165,24 +183,6 @@ partial class CarsFilteringForm
         transmissionCheckedListBox.Size = new Size(150, 48);
         transmissionCheckedListBox.TabIndex = 0;
         // 
-        // engineCheckedListBox
-        // 
-        engineCheckedListBox.FormattingEnabled = true;
-        engineCheckedListBox.Items.AddRange(new object[] { "Дизельний", "Бензиновий", "Електричний", "Гібридний" });
-        engineCheckedListBox.Location = new Point(19, 26);
-        engineCheckedListBox.Name = "engineCheckedListBox";
-        engineCheckedListBox.Size = new Size(150, 92);
-        engineCheckedListBox.TabIndex = 0;
-        // 
-        // bodyTypeCheckedListBox
-        // 
-        bodyTypeCheckedListBox.FormattingEnabled = true;
-        bodyTypeCheckedListBox.Items.AddRange(new object[] { "Седан", "Хетчбек", "Купе" });
-        bodyTypeCheckedListBox.Location = new Point(18, 26);
-        bodyTypeCheckedListBox.Name = "bodyTypeCheckedListBox";
-        bodyTypeCheckedListBox.Size = new Size(147, 70);
-        bodyTypeCheckedListBox.TabIndex = 11;
-        // 
         // CarsFilteringForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
@@ -195,7 +195,7 @@ partial class CarsFilteringForm
         Controls.Add(colorGroupBox);
         Controls.Add(okButton);
         Name = "CarsFilteringForm";
-        Text = "CarsFilteringForm";
+        Text = "Фільтрація автомобілей";
         colorGroupBox.ResumeLayout(false);
         priceGroupBox.ResumeLayout(false);
         priceGroupBox.PerformLayout();

@@ -28,9 +28,6 @@
       <Compile Update="Forms\UserCarsForm.cs">
         <SubType>Form</SubType>
       </Compile>
-      <Compile Update="Forms\MainForm.cs">
-        <SubType>Form</SubType>
-      </Compile>
       <Compile Update="Forms\CarsFilteringForm.cs">
         <SubType>Form</SubType>
       </Compile>

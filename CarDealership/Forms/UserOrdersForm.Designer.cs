@@ -139,7 +139,7 @@
             Controls.Add(menuStrip);
             MainMenuStrip = menuStrip;
             Name = "UserOrdersForm";
-            Text = "UserOrdersForm";
+            Text = "Замовлення";
             Load += UserOrdersForm_Load;
             ((System.ComponentModel.ISupportInitialize)ordersDataGridView).EndInit();
             filterGroupBox.ResumeLayout(false);
