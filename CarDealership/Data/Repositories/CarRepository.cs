@@ -44,7 +44,7 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         ";
 
         var mostPopularModels = new List<string>();
-        
+
         await using var command = new SqlCommand(sql, Connection);
         await using var reader = await command.ExecuteReaderAsync();
 
@@ -52,7 +52,7 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         {
             mostPopularModels.Add(reader.GetString(reader.GetOrdinal(nameof(Model.Name))));
         }
-        
+
         return mostPopularModels;
     }
 
@@ -221,41 +221,47 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         return cars;
     }
 
-    // public async Task AddAsync(Car car)
-    // {
-    //     var sql =
-    //         "INSERT INTO [Car] (Model, Price, ImageUrl, Color, Year) VALUES (@model, @price, @imageUrl, @segment, @color, @year)";
-    //
-    //     await using var command = new SqlCommand(sql, Connection);
-    //     command.Parameters.AddWithValue("@price", car.Price);
-    //     command.Parameters.AddWithValue("@imageUrl", car.ImageUrl);
-    //     command.Parameters.AddWithValue("@color", car.Color);
-    //     command.Parameters.AddWithValue("@year", car.Year);
-    //
-    //     await command.ExecuteNonQueryAsync();
-    // }
+    public async Task AddAsync(Car car)
+    {
+        var sql =
+            "INSERT INTO [Car] (Price, ImageUrl, Color, Year, Status, TechnicalCharacteristicsId, DealerId) VALUES (@price, @imageUrl, @color, @year, @status, @technicalCharacteristicsId, @dealerId)";
 
-    // public async Task UpdateAsync(Car car)
-    // {
-    //     var sql =
-    //         "UPDATE [Car] SET Model = @model, Price = @price, ImageUrl = @imageUrl, Segment = @segment, Color = @color, Year = @year WHERE Id = @Id";
-    //
-    //     await using var command = new SqlCommand(sql, Connection);
-    //     command.Parameters.AddWithValue("@Id", car.Id);
-    //     command.Parameters.AddWithValue("@price", car.Price);
-    //     command.Parameters.AddWithValue("@imageUrl", car.ImageUrl);
-    //     command.Parameters.AddWithValue("@color", car.Color);
-    //     command.Parameters.AddWithValue("@year", car.Year);
-    //
-    //     await command.ExecuteNonQueryAsync();
-    // }
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@price", car.Price);
+        command.Parameters.AddWithValue("@imageUrl", car.ImageUrl);
+        command.Parameters.AddWithValue("@color", car.Color);
+        command.Parameters.AddWithValue("@year", car.Year);
+        command.Parameters.AddWithValue("@status", car.Status);
+        command.Parameters.AddWithValue("@technicalCharacteristicsId", car.TechnicalCharacteristicsId);
+        command.Parameters.AddWithValue("@dealerId", car.DealerId);
 
-    // public async Task RemoveAsync(int id)
-    // {
-    //     var sql = "DELETE FROM [Car] WHERE Id = @Id";
-    //     using var command = new SqlCommand(sql, Connection);
-    //     command.Parameters.AddWithValue("@Id", id);
-    //
-    //     await command.ExecuteNonQueryAsync();
-    // }
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task UpdateAsync(Car car)
+    {
+        var sql =
+            "UPDATE [Car] SET Price = @price, ImageUrl = @imageUrl, Color = @color, Year = @year, Status = @status, TechnicalCharacteristicsId = @technicalCharacteristicsId, DealerId = @dealerId WHERE Id = @Id";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@Id", car.Id);
+        command.Parameters.AddWithValue("@price", car.Price);
+        command.Parameters.AddWithValue("@imageUrl", car.ImageUrl);
+        command.Parameters.AddWithValue("@color", car.Color);
+        command.Parameters.AddWithValue("@year", car.Year);
+        command.Parameters.AddWithValue("@status", car.Status);
+        command.Parameters.AddWithValue("@technicalCharacteristicsId", car.TechnicalCharacteristicsId);
+        command.Parameters.AddWithValue("@dealerId", car.DealerId);
+
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task RemoveAsync(int id)
+    {
+        var sql = "DELETE FROM [Car] WHERE Id = @Id";
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@Id", id);
+
+        await command.ExecuteNonQueryAsync();
+    }
 }

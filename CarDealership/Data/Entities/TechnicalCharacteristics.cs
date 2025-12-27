@@ -15,4 +15,7 @@ public class TechnicalCharacteristics : Entity
     
     public int ModelId { get; set; }
     public Model? Model { get; set; }
+
+
+    public string CharacteristicsName => $"{Model?.Brand} {Model?.Name}";
 }

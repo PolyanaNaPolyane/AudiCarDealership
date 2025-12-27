@@ -33,18 +33,18 @@ public class CarService(ICarRepository carRepository) : ICarService
         return carRepository.ChangeStatusAsync(id, status);
     }
 
-    // public Task AddAsync(Car car)
-    // {
-    //     return carRepository.AddAsync(car);
-    // }
-    //
-    // public Task UpdateAsync(Car car)
-    // {
-    //     return carRepository.UpdateAsync(car);
-    // }
-    //
-    // public Task RemoveAsync(int id)
-    // {
-    //     return carRepository.RemoveAsync(id);
-    // }
+    public Task AddAsync(Car car)
+    {
+        return carRepository.AddAsync(car);
+    }
+    
+    public Task UpdateAsync(Car car)
+    {
+        return carRepository.UpdateAsync(car);
+    }
+    
+    public Task RemoveAsync(int id)
+    {
+        return carRepository.RemoveAsync(id);
+    }
 }

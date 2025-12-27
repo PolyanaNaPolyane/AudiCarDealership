@@ -188,6 +188,78 @@ public static class ValidationUtil
         message = null;
         return true;
     }
+
+    public static bool IsValidYear(this TextBox textBox, out string message)
+    {
+        if (!int.TryParse(textBox.Text, out var birthYear) || birthYear < 1950 || birthYear > DateTime.Now.Year)
+        {
+            message = $"Рік повинен бути числом від 1950 до {DateTime.Now.Year}";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
+    
+    public static bool IsValidImage(this TextBox textBox, out string message)
+    {
+        if (string.IsNullOrWhiteSpace(textBox.Text))
+        {
+            message = "Картинка повинна бути заповнена";
+            return false;
+        }
+        
+        message = null;
+        return true;
+    }
+    
+    public static bool IsValidColor(this TextBox textBox, out string message)
+    {
+        if (string.IsNullOrWhiteSpace(textBox.Text))
+        {
+            message = "Колір повинен бути заповнений";
+            return false;
+        }
+        
+        message = null;
+        return true;
+    }
+
+    public static bool IsValidPrice(this TextBox textBox, out string message)
+    {
+        if (!decimal.TryParse(textBox.Text, out var overallPrice) || overallPrice <= 0)
+        {
+            message = "Ціна повинна бути більшою 0";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
+    
+    public static bool IsValidDealer(this ComboBox comboBox, out string message)
+    {
+        if (comboBox.SelectedIndex < 0)
+        {
+            message = "Оберіть дилера з випадаючого списка";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
+    
+    public static bool IsValidTechnicalCharacteristics(this ComboBox comboBox, out string message)
+    {
+        if (comboBox.SelectedIndex < 0)
+        {
+            message = "Оберіть технічні характеристики з випадаючого списка";
+            return false;
+        }
+
+        message = null;
+        return true;
+    }
     
     public static bool IsValidOverallPrice(this TextBox textBox, out string message)
     {

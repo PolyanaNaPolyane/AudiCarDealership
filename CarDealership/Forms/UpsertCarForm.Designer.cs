@@ -41,7 +41,7 @@ partial class UpsertCarForm
         dealerLabel = new Label();
         okButton = new Button();
         cancelButton = new Button();
-        textBox1 = new TextBox();
+        vinTextBox = new TextBox();
         priceTextBox = new TextBox();
         imageUrlTextBox = new TextBox();
         colorTextBox = new TextBox();
@@ -131,6 +131,7 @@ partial class UpsertCarForm
         okButton.TabIndex = 8;
         okButton.Text = "ОК";
         okButton.UseVisualStyleBackColor = true;
+        okButton.Click += okButton_Click;
         // 
         // cancelButton
         // 
@@ -140,13 +141,15 @@ partial class UpsertCarForm
         cancelButton.TabIndex = 9;
         cancelButton.Text = "Відмінити";
         cancelButton.UseVisualStyleBackColor = true;
+        cancelButton.Click += cancelButton_Click;
         // 
-        // textBox1
+        // vinTextBox
         // 
-        textBox1.Location = new Point(54, 6);
-        textBox1.Name = "textBox1";
-        textBox1.Size = new Size(125, 27);
-        textBox1.TabIndex = 10;
+        vinTextBox.Enabled = false;
+        vinTextBox.Location = new Point(54, 6);
+        vinTextBox.Name = "vinTextBox";
+        vinTextBox.Size = new Size(125, 27);
+        vinTextBox.TabIndex = 10;
         // 
         // priceTextBox
         // 
@@ -212,7 +215,7 @@ partial class UpsertCarForm
         Controls.Add(colorTextBox);
         Controls.Add(imageUrlTextBox);
         Controls.Add(priceTextBox);
-        Controls.Add(textBox1);
+        Controls.Add(vinTextBox);
         Controls.Add(cancelButton);
         Controls.Add(okButton);
         Controls.Add(dealerLabel);
@@ -225,6 +228,7 @@ partial class UpsertCarForm
         Controls.Add(vinLabel);
         Name = "UpsertCarForm";
         Text = "UpsertCarForm";
+        Load += UpsertCarForm_Load;
         ResumeLayout(false);
         PerformLayout();
     }
@@ -241,7 +245,7 @@ partial class UpsertCarForm
     private Label dealerLabel;
     private Button okButton;
     private Button cancelButton;
-    private TextBox textBox1;
+    private TextBox vinTextBox;
     private TextBox priceTextBox;
     private TextBox imageUrlTextBox;
     private TextBox colorTextBox;
