@@ -50,7 +50,7 @@ public partial class RegistrationForm : Form
 
         if (account == null)
         {
-            MessageUtil.ShowError("Користувач з такою поштою вже існує введена пошта чи пароль");
+            MessageUtil.ShowError("Користувач з такою поштою вже існує");
             return;
         }
         

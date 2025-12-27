@@ -65,9 +65,9 @@ partial class RegistrationForm
         contactDetailsGroupBox.Controls.Add(addressLabel);
         contactDetailsGroupBox.Controls.Add(cityLabel);
         contactDetailsGroupBox.Controls.Add(countryLabel);
-        contactDetailsGroupBox.Location = new Point(15, 214);
+        contactDetailsGroupBox.Location = new Point(12, 195);
         contactDetailsGroupBox.Name = "contactDetailsGroupBox";
-        contactDetailsGroupBox.Size = new Size(250, 154);
+        contactDetailsGroupBox.Size = new Size(279, 154);
         contactDetailsGroupBox.TabIndex = 0;
         contactDetailsGroupBox.TabStop = false;
         contactDetailsGroupBox.Text = "Контактні дані";
@@ -146,9 +146,9 @@ partial class RegistrationForm
         generalGroupBox.Controls.Add(emailLabel);
         generalGroupBox.Controls.Add(lastNameLabel);
         generalGroupBox.Controls.Add(firstNameLabel);
-        generalGroupBox.Location = new Point(12, 31);
+        generalGroupBox.Location = new Point(12, 12);
         generalGroupBox.Name = "generalGroupBox";
-        generalGroupBox.Size = new Size(253, 177);
+        generalGroupBox.Size = new Size(279, 177);
         generalGroupBox.TabIndex = 1;
         generalGroupBox.TabStop = false;
         generalGroupBox.Text = "Загальні відомості";
@@ -219,7 +219,7 @@ partial class RegistrationForm
         // 
         // registerButton
         // 
-        registerButton.Location = new Point(71, 385);
+        registerButton.Location = new Point(83, 355);
         registerButton.Name = "registerButton";
         registerButton.Size = new Size(140, 38);
         registerButton.TabIndex = 2;
@@ -229,7 +229,7 @@ partial class RegistrationForm
         // 
         // loginButton
         // 
-        loginButton.Location = new Point(71, 429);
+        loginButton.Location = new Point(83, 399);
         loginButton.Name = "loginButton";
         loginButton.Size = new Size(140, 35);
         loginButton.TabIndex = 3;
@@ -241,7 +241,7 @@ partial class RegistrationForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(279, 476);
+        ClientSize = new Size(303, 445);
         Controls.Add(loginButton);
         Controls.Add(registerButton);
         Controls.Add(generalGroupBox);

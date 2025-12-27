@@ -35,8 +35,10 @@ public class AccountService(
         {
             return null;
         }
-        
-        account.ContactDetails.Id = await contactDetailsRepository.AddAsync(account.ContactDetails);
+
+        var contactDetailsId = await contactDetailsRepository.AddAsync(account.ContactDetails);
+        account.ContactDetailsId = contactDetailsId;
+        account.ContactDetails.Id = contactDetailsId;
         account.PasswordHash = passwordHasher.GetHash(account.PasswordHash);
         account.Id = await accountRepository.AddAsync(account);
         

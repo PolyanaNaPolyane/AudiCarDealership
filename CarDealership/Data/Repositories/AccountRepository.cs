@@ -9,11 +9,11 @@ public class AccountRepository(string connectionString) : BaseAdoNetRepository(c
 {
     public async Task<bool> IsEmailExistAsync(string email)
     {
-        var sql = "SELECT Id FROM [Accounts] WHERE Email = @email";
+        var sql = "SELECT Id FROM [Account] WHERE Email = @email";
         await using var command = new SqlCommand(sql, Connection);
         command.Parameters.AddWithValue("@email", email);
 
-        var result = (int)await command.ExecuteScalarAsync();
+        var result = (int?)await command.ExecuteScalarAsync();
 
         return result > 0;
     }
