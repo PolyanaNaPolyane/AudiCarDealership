@@ -53,11 +53,18 @@ partial class UserCarsForm
         // 
         // carsDataGridView
         // 
+        carsDataGridView.AllowUserToAddRows = false;
+        carsDataGridView.AllowUserToDeleteRows = false;
+        carsDataGridView.AllowUserToOrderColumns = true;
+        carsDataGridView.AllowUserToResizeRows = false;
         carsDataGridView.ColumnHeadersHeight = 29;
         carsDataGridView.Location = new Point(12, 102);
+        carsDataGridView.MultiSelect = false;
         carsDataGridView.Name = "carsDataGridView";
+        carsDataGridView.ReadOnly = true;
         carsDataGridView.RowHeadersWidth = 51;
-        carsDataGridView.Size = new Size(520, 143);
+        carsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        carsDataGridView.Size = new Size(520, 134);
         carsDataGridView.TabIndex = 0;
         // 
         // menuStrip1
@@ -154,7 +161,7 @@ partial class UserCarsForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(544, 259);
+        ClientSize = new Size(544, 248);
         Controls.Add(filterGroupBox);
         Controls.Add(searchGroupBox);
         Controls.Add(carsDataGridView);
