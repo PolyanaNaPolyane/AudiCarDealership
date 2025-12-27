@@ -52,5 +52,7 @@ public partial class MainCustomerForm : Form
         {
             await _accountService.DeleteAsync();
         }
+
+        Close();
     }
 }

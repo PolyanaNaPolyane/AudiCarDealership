@@ -74,7 +74,17 @@ public class AccountRepository(string connectionString) : BaseAdoNetRepository(c
 
     public async Task<Account?> FindAsync(string email)
     {
-        var sql = @"SELECT * FROM [Account] WHERE [Email] = @email";
+        var sql = @"
+            SELECT 
+                account.*, 
+                contactDetails.Id as ContactDetailsId,
+                contactDetails.Country,
+                contactDetails.City,
+                contactDetails.Address,
+                contactDetails.PhoneNumber
+            FROM [Account] account
+            JOIN [ContactDetails] contactDetails ON account.ContactDetailsId = contactDetails.Id
+            WHERE account.[Email] = @email";
 
         await using var command = new SqlCommand(sql, Connection);
         command.Parameters.AddWithValue("@email", email);
@@ -94,7 +104,15 @@ public class AccountRepository(string connectionString) : BaseAdoNetRepository(c
             Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),
             PasswordHash = reader.GetString(reader.GetOrdinal(nameof(Account.PasswordHash))),
             Type = (AccountType)reader.GetInt32(reader.GetOrdinal(nameof(Account.Type))),
-            ContactDetailsId = reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
+            ContactDetailsId = reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId))),
+            ContactDetails = new ContactDetails
+            {
+                Id = reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId))),
+                Country = reader.GetString(reader.GetOrdinal(nameof(ContactDetails.Country))),
+                City = reader.GetString(reader.GetOrdinal(nameof(ContactDetails.City))),
+                Address = reader.GetString(reader.GetOrdinal(nameof(ContactDetails.Address))),
+                PhoneNumber = reader.GetString(reader.GetOrdinal(nameof(ContactDetails.PhoneNumber)))
+            }
         };
     }
 }
