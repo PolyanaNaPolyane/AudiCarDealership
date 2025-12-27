@@ -20,7 +20,7 @@ public class Program
         ApplicationConfiguration.Initialize();
 
         var host = CreateHostBuilder().Build();
-        var loginForm = host.Services.GetRequiredService<MainManagerForm>();
+        var loginForm = host.Services.GetRequiredService<LoginForm>();
 
         Application.Run(loginForm);
     }
