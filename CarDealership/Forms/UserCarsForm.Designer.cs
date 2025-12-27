@@ -159,7 +159,10 @@ partial class UserCarsForm
         Controls.Add(searchGroupBox);
         Controls.Add(carsDataGridView);
         Controls.Add(menuStrip1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "UserCarsForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Автомобілі";
         Load += CarsForm_Load;
         ((ISupportInitialize)carsBindingSource).EndInit();

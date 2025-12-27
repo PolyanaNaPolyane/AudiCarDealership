@@ -80,7 +80,10 @@ partial class LoginForm
         Controls.Add(passwordTextBox);
         Controls.Add(emailTextBox);
         Controls.Add(loginButton);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "LoginForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Логін";
         ResumeLayout(false);
         PerformLayout();

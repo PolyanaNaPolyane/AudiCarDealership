@@ -186,8 +186,11 @@ partial class MainManagerForm
         ClientSize = new Size(478, 398);
         Controls.Add(statisticsPanel);
         Controls.Add(menuStrip1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         MainMenuStrip = menuStrip1;
+        MaximizeBox = false;
         Name = "MainManagerForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Головне меню менеджера";
         Load += MainManagerForm_Load;
         statisticsGroupBox.ResumeLayout(false);

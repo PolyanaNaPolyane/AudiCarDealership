@@ -95,7 +95,7 @@ partial class CarsFilteringForm
         // 
         // okButton
         // 
-        okButton.Location = new Point(272, 305);
+        okButton.Location = new Point(272, 293);
         okButton.Name = "okButton";
         okButton.Size = new Size(94, 29);
         okButton.TabIndex = 5;
@@ -187,14 +187,17 @@ partial class CarsFilteringForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(612, 359);
+        ClientSize = new Size(612, 334);
         Controls.Add(transmissionTypeGroupBox);
         Controls.Add(engineTypeGroupBox);
         Controls.Add(bodyTypeGroupBox);
         Controls.Add(priceGroupBox);
         Controls.Add(colorGroupBox);
         Controls.Add(okButton);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "CarsFilteringForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Фільтрація автомобілей";
         colorGroupBox.ResumeLayout(false);
         priceGroupBox.ResumeLayout(false);

@@ -68,7 +68,7 @@ partial class CarDetailsForm
         // 
         // exportButton
         // 
-        exportButton.Location = new Point(304, 269);
+        exportButton.Location = new Point(287, 269);
         exportButton.Name = "exportButton";
         exportButton.Size = new Size(126, 29);
         exportButton.TabIndex = 0;
@@ -378,11 +378,14 @@ partial class CarDetailsForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(730, 322);
+        ClientSize = new Size(730, 309);
         Controls.Add(technicalCharacteristicsGroupBox);
         Controls.Add(generalGroupBox);
         Controls.Add(exportButton);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "CarDetailsForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Деталі автомобіля";
         generalGroupBox.ResumeLayout(false);
         generalGroupBox.PerformLayout();

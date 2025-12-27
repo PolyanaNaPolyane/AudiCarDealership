@@ -236,8 +236,11 @@ partial class ManagerTablesForm
         Controls.Add(searchGroupBox);
         Controls.Add(dataGridView);
         Controls.Add(menuStrip1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         MainMenuStrip = menuStrip1;
+        MaximizeBox = false;
         Name = "ManagerTablesForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "”правл≥нн€ таблиц€ми";
         Load += ManagerTablesForm_Load;
         filterGroupBox.ResumeLayout(false);

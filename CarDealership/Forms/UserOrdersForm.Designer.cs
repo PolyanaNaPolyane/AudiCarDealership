@@ -137,8 +137,11 @@
             Controls.Add(searchGroupBox);
             Controls.Add(ordersDataGridView);
             Controls.Add(menuStrip);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip;
+            MaximizeBox = false;
             Name = "UserOrdersForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Замовлення";
             Load += UserOrdersForm_Load;
             ((System.ComponentModel.ISupportInitialize)ordersDataGridView).EndInit();

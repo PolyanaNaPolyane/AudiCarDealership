@@ -207,7 +207,7 @@ partial class UpsertCarForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(362, 450);
+        ClientSize = new Size(362, 433);
         Controls.Add(technicalCharacteristicsComboBox);
         Controls.Add(dealerComboBox);
         Controls.Add(statusComboBox);
@@ -226,7 +226,10 @@ partial class UpsertCarForm
         Controls.Add(imageUrlLabel);
         Controls.Add(priceLabel);
         Controls.Add(vinLabel);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "UpsertCarForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Load += UpsertCarForm_Load;
         ResumeLayout(false);
         PerformLayout();

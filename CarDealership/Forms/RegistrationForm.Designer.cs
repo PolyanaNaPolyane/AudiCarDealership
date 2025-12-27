@@ -246,7 +246,10 @@ partial class RegistrationForm
         Controls.Add(registerButton);
         Controls.Add(generalGroupBox);
         Controls.Add(contactDetailsGroupBox);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "RegistrationForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Регістрація";
         contactDetailsGroupBox.ResumeLayout(false);
         contactDetailsGroupBox.PerformLayout();

@@ -92,7 +92,7 @@ partial class UpsertOrderForm
         // 
         // okButton
         // 
-        okButton.Location = new Point(12, 223);
+        okButton.Location = new Point(89, 209);
         okButton.Name = "okButton";
         okButton.Size = new Size(94, 29);
         okButton.TabIndex = 5;
@@ -102,7 +102,7 @@ partial class UpsertOrderForm
         // 
         // cancelButton
         // 
-        cancelButton.Location = new Point(158, 223);
+        cancelButton.Location = new Point(235, 209);
         cancelButton.Name = "cancelButton";
         cancelButton.Size = new Size(94, 29);
         cancelButton.TabIndex = 6;
@@ -152,7 +152,7 @@ partial class UpsertOrderForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(404, 268);
+        ClientSize = new Size(404, 248);
         Controls.Add(overallPriceTextBox);
         Controls.Add(orderCreationDateTimePicker);
         Controls.Add(statusComboBox);
@@ -165,7 +165,10 @@ partial class UpsertOrderForm
         Controls.Add(createdDateLabel);
         Controls.Add(carLabel);
         Controls.Add(accountLabel);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
         Name = "UpsertOrderForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Load += UpsertOrderForm_Load;
         ResumeLayout(false);
         PerformLayout();

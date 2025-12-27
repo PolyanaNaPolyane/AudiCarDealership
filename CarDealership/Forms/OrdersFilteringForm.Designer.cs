@@ -122,7 +122,10 @@
             Controls.Add(okButton);
             Controls.Add(statusGroupBox);
             Controls.Add(priceGroupBox);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "OrdersFilteringForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Фільтрація замовлень";
             priceGroupBox.ResumeLayout(false);
             priceGroupBox.PerformLayout();

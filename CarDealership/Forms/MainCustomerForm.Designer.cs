@@ -92,7 +92,7 @@ partial class MainCustomerForm
         customerStatisticsGroupBox.Controls.Add(spentMoneyGroupBox);
         customerStatisticsGroupBox.Location = new Point(12, 118);
         customerStatisticsGroupBox.Name = "customerStatisticsGroupBox";
-        customerStatisticsGroupBox.Size = new Size(422, 251);
+        customerStatisticsGroupBox.Size = new Size(422, 195);
         customerStatisticsGroupBox.TabIndex = 2;
         customerStatisticsGroupBox.TabStop = false;
         customerStatisticsGroupBox.Text = "Статистика";
@@ -158,12 +158,15 @@ partial class MainCustomerForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(447, 379);
+        ClientSize = new Size(447, 324);
         Controls.Add(welcomeGroupBox);
         Controls.Add(customerStatisticsGroupBox);
         Controls.Add(mainCustomerFormMenuStrip);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         MainMenuStrip = mainCustomerFormMenuStrip;
+        MaximizeBox = false;
         Name = "MainCustomerForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Головне меню користувача";
         Load += MainCustomerForm_Load;
         orderCountGroupBox.ResumeLayout(false);
