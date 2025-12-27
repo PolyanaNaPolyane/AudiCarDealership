@@ -139,6 +139,7 @@ partial class MainCustomerForm
         carsToolStripMenuItem.Name = "carsToolStripMenuItem";
         carsToolStripMenuItem.Size = new Size(101, 24);
         carsToolStripMenuItem.Text = "Автомобілі";
+        carsToolStripMenuItem.Click += carsToolStripMenuItem_Click;
         // 
         // ordersToolStripMenuItem
         // 
