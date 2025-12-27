@@ -38,7 +38,6 @@ public class Program
                 services.AddTransient<LoginForm>();
                 services.AddTransient<MainCustomerForm>();
                 services.AddTransient<MainManagerForm>();
-                services.AddTransient<RegistrationForm>();
                 services.AddTransient<UserCarsForm>();
                 services.AddTransient<UserOrdersForm>();
                 services.AddTransient<ManagerTablesForm>();

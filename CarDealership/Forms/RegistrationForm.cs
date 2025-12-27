@@ -9,15 +9,13 @@ namespace CarDealership.Forms;
 
 public partial class RegistrationForm : Form
 {
-    private readonly IFormNavigation _formNavigation;
     private readonly IAccountService _accountService;
     private readonly AccountContext _accountContext;
 
-    public RegistrationForm(IFormNavigation formNavigation, IAccountService accountService, AccountContext accountContext)
+    public RegistrationForm(IAccountService accountService, AccountContext accountContext)
     {
         InitializeComponent();
 
-        _formNavigation = formNavigation;
         _accountService = accountService;
         _accountContext = accountContext;
     }
@@ -53,14 +51,8 @@ public partial class RegistrationForm : Form
             MessageUtil.ShowError("Користувач з такою поштою вже існує");
             return;
         }
-        
-        _accountContext.CurrentAccount = account;
-        _formNavigation.NavigateTo<MainCustomerForm>(this);
-    }
 
-    private void loginButton_Click(object sender, EventArgs e)
-    {
-        _formNavigation.NavigateTo<LoginForm>(this);
+        Close();
     }
     
     private string ValidateRegisterForm()

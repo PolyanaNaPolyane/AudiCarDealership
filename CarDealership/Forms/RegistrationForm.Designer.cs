@@ -50,7 +50,6 @@ partial class RegistrationForm
         lastNameLabel = new Label();
         firstNameLabel = new Label();
         registerButton = new Button();
-        loginButton = new Button();
         contactDetailsGroupBox.SuspendLayout();
         generalGroupBox.SuspendLayout();
         SuspendLayout();
@@ -227,22 +226,11 @@ partial class RegistrationForm
         registerButton.UseVisualStyleBackColor = true;
         registerButton.Click += registerButton_Click;
         // 
-        // loginButton
-        // 
-        loginButton.Location = new Point(83, 399);
-        loginButton.Name = "loginButton";
-        loginButton.Size = new Size(140, 35);
-        loginButton.TabIndex = 3;
-        loginButton.Text = "Увійти";
-        loginButton.UseVisualStyleBackColor = true;
-        loginButton.Click += loginButton_Click;
-        // 
         // RegistrationForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(303, 445);
-        Controls.Add(loginButton);
+        ClientSize = new Size(303, 402);
         Controls.Add(registerButton);
         Controls.Add(generalGroupBox);
         Controls.Add(contactDetailsGroupBox);
@@ -279,5 +267,4 @@ partial class RegistrationForm
     private TextBox lastNameTextBox;
     private TextBox firstNameTextBox;
     private Button registerButton;
-    private Button loginButton;
 }

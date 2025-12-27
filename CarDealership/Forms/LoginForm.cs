@@ -78,6 +78,7 @@ public partial class LoginForm : Form
 
     private void registerButton_Click(object sender, EventArgs e)
     {
-        _formNavigation.NavigateTo<RegistrationForm>(this);
+        var registrationForm = new RegistrationForm(_accountService, _accountContext);
+        registrationForm.ShowDialog();
     }
 }
