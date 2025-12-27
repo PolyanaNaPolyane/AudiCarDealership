@@ -12,5 +12,5 @@ public interface ICarRepository
     Task<IEnumerable<string>> GetMostPopularModelsAsync();
     Task AddAsync(Car car);
     Task UpdateAsync(Car car);
-    Task RemoveAsync(int id);
+    Task DeleteAsync(int id);
 }

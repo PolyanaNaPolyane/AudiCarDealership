@@ -13,5 +13,5 @@ public interface ICarService
     Task ChangeStatusAsync(int id, CarStatus status);
     Task AddAsync(Car car);
     Task UpdateAsync(Car car);
-    Task RemoveAsync(int id);
+    Task DeleteAsync(int id);
 }

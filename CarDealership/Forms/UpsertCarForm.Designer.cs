@@ -148,7 +148,7 @@ partial class UpsertCarForm
         vinTextBox.Enabled = false;
         vinTextBox.Location = new Point(54, 6);
         vinTextBox.Name = "vinTextBox";
-        vinTextBox.Size = new Size(125, 27);
+        vinTextBox.Size = new Size(284, 27);
         vinTextBox.TabIndex = 10;
         // 
         // priceTextBox

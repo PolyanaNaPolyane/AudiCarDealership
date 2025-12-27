@@ -43,8 +43,8 @@ public class CarService(ICarRepository carRepository) : ICarService
         return carRepository.UpdateAsync(car);
     }
     
-    public Task RemoveAsync(int id)
+    public Task DeleteAsync(int id)
     {
-        return carRepository.RemoveAsync(id);
+        return carRepository.DeleteAsync(id);
     }
 }

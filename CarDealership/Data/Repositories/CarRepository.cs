@@ -256,7 +256,7 @@ public class CarRepository(string connectionString) : BaseAdoNetRepository(conne
         await command.ExecuteNonQueryAsync();
     }
 
-    public async Task RemoveAsync(int id)
+    public async Task DeleteAsync(int id)
     {
         var sql = "DELETE FROM [Car] WHERE Id = @Id";
         await using var command = new SqlCommand(sql, Connection);

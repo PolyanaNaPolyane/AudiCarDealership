@@ -19,6 +19,7 @@ public partial class ManagerTablesForm : Form
     private readonly BindingSource _data = new();
 
     private IEnumerable<Order> _allOrders = [];
+    private IEnumerable<Car> _allCars = [];
 
     private CarsFilter _carsFilter = new()
     {
@@ -108,8 +109,8 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadCarsAsync()
     {
-        var cars = await _carService.GetAllAsync();
-        _data.DataSource = ToCarsTable(cars);
+        _allCars = await _carService.GetAllAsync();
+        _data.DataSource = ToCarsTable(_allCars);
         dataGridView.DataSource = _data;
     }
 
@@ -300,9 +301,13 @@ public partial class ManagerTablesForm : Form
     {
         switch (tableLabel.Text)
         {
+            case "Автомобілі":
+                var addCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService);
+                addCarForm.ShowDialog();
+                break;
             case "Замовлення":
-                var updateOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService);
-                updateOrderForm.ShowDialog();
+                var addOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService);
+                addOrderForm.ShowDialog();
                 break;
         }
     }
@@ -314,6 +319,17 @@ public partial class ManagerTablesForm : Form
 
         switch (tableLabel.Text)
         {
+            case "Автомобілі":
+                var selectedCar = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
+
+                if (selectedCar.Status != CarStatus.Available)
+                {
+                    MessageUtil.ShowError("Неможливо видалити автомобіль");
+                    return;
+                }
+                
+                await _carService.DeleteAsync(selectedCar.Id);
+                break;
             case "Змовлення":
                 var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
 
@@ -326,8 +342,6 @@ public partial class ManagerTablesForm : Form
                 await _orderService.DeleteAsync(selectedOrder.Id);
                 await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Available);
                 break;
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -338,6 +352,11 @@ public partial class ManagerTablesForm : Form
 
         switch (tableLabel.Text)
         {
+            case "Автомобілі":
+                var carToUpdate = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
+                var updateCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService, carToUpdate);
+                updateCarForm.ShowDialog();
+                break;
             case "Замовлення":
                 var orderToUpdate = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
                 var updateOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService, orderToUpdate);
