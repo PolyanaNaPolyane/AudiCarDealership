@@ -57,7 +57,7 @@ partial class UserCarsForm
         carsDataGridView.Location = new Point(12, 102);
         carsDataGridView.Name = "carsDataGridView";
         carsDataGridView.RowHeadersWidth = 51;
-        carsDataGridView.Size = new Size(670, 198);
+        carsDataGridView.Size = new Size(520, 143);
         carsDataGridView.TabIndex = 0;
         // 
         // menuStrip1
@@ -66,7 +66,7 @@ partial class UserCarsForm
         menuStrip1.Items.AddRange(new ToolStripItem[] { діїToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(696, 28);
+        menuStrip1.Size = new Size(544, 28);
         menuStrip1.TabIndex = 3;
         menuStrip1.Text = "menuStrip1";
         // 
@@ -97,14 +97,14 @@ partial class UserCarsForm
         searchGroupBox.Controls.Add(searchTextBox);
         searchGroupBox.Location = new Point(12, 31);
         searchGroupBox.Name = "searchGroupBox";
-        searchGroupBox.Size = new Size(355, 65);
+        searchGroupBox.Size = new Size(251, 65);
         searchGroupBox.TabIndex = 4;
         searchGroupBox.TabStop = false;
         searchGroupBox.Text = "Пошук";
         // 
         // searchButton
         // 
-        searchButton.Location = new Point(255, 25);
+        searchButton.Location = new Point(146, 25);
         searchButton.Name = "searchButton";
         searchButton.Size = new Size(94, 29);
         searchButton.TabIndex = 5;
@@ -116,25 +116,25 @@ partial class UserCarsForm
         // 
         searchTextBox.Location = new Point(6, 26);
         searchTextBox.Name = "searchTextBox";
-        searchTextBox.Size = new Size(243, 27);
+        searchTextBox.Size = new Size(134, 27);
         searchTextBox.TabIndex = 5;
         // 
         // filterGroupBox
         // 
         filterGroupBox.Controls.Add(resetButton);
         filterGroupBox.Controls.Add(applyButton);
-        filterGroupBox.Location = new Point(373, 31);
+        filterGroupBox.Location = new Point(269, 31);
         filterGroupBox.Name = "filterGroupBox";
-        filterGroupBox.Size = new Size(309, 65);
+        filterGroupBox.Size = new Size(263, 65);
         filterGroupBox.TabIndex = 5;
         filterGroupBox.TabStop = false;
         filterGroupBox.Text = "Фільтрація";
         // 
         // resetButton
         // 
-        resetButton.Location = new Point(173, 26);
+        resetButton.Location = new Point(143, 25);
         resetButton.Name = "resetButton";
-        resetButton.Size = new Size(127, 29);
+        resetButton.Size = new Size(107, 29);
         resetButton.TabIndex = 1;
         resetButton.Text = "Зняти фільтр";
         resetButton.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@ partial class UserCarsForm
         // 
         applyButton.Location = new Point(6, 26);
         applyButton.Name = "applyButton";
-        applyButton.Size = new Size(161, 29);
+        applyButton.Size = new Size(131, 29);
         applyButton.TabIndex = 0;
         applyButton.Text = "Накласти фільтр";
         applyButton.UseVisualStyleBackColor = true;
@@ -154,7 +154,7 @@ partial class UserCarsForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(696, 314);
+        ClientSize = new Size(544, 259);
         Controls.Add(filterGroupBox);
         Controls.Add(searchGroupBox);
         Controls.Add(carsDataGridView);
