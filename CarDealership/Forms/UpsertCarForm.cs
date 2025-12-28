@@ -154,14 +154,14 @@ public partial class UpsertCarForm : Form
 
         errors.AppendValidationErrorIfInvalid(
             ref errorIndex,
-            dealerComboBox.IsValidDealer(out var invalidDealerMessage),
-            invalidDealerMessage);
+            technicalCharacteristicsComboBox.IsValidTechnicalCharacteristics(
+            out var invalidTechnicalCharacteristicsMessage),
+            invalidTechnicalCharacteristicsMessage);
 
         errors.AppendValidationErrorIfInvalid(
             ref errorIndex,
-            technicalCharacteristicsComboBox.IsValidTechnicalCharacteristics(
-                out var invalidTechnicalCharacteristicsMessage),
-            invalidTechnicalCharacteristicsMessage);
+            dealerComboBox.IsValidDealer(out var invalidDealerMessage),
+            invalidDealerMessage);
 
         return errors.ToString();
     }
