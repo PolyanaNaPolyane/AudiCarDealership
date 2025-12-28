@@ -1,6 +1,7 @@
 ﻿using CarDealership.Data.Entities;
 using CarDealership.Services.Interfaces;
 using System.Data;
+using CarDealership.Utils;
 
 namespace CarDealership.Forms;
 
@@ -41,6 +42,7 @@ public partial class UserCarsForm : Form
         _carsBindingSource.DataSource = ToCarsTable(_allCars);
         carsDataGridView.DataSource = _carsBindingSource;
         carsDataGridView.Columns["Id"].Visible = false;
+        carsDataGridView.ClearSelection();
     }
 
     private void searchButton_Click(object sender, EventArgs e)
@@ -79,8 +81,7 @@ public partial class UserCarsForm : Form
 
         if (foundRowsCount == 0)
         {
-            MessageBox.Show("Записів не було знайдено", "Попередження", MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Warning);
+            MessageUtil.ShowInformation("Записів не було знайдено");
         }
     }
 
@@ -99,7 +100,7 @@ public partial class UserCarsForm : Form
 
         if (_carsFilter.PriceTo.HasValue)
         {
-            filteredCars = filteredCars.Where(car => car.Price <= _carsFilter.PriceFrom.Value);
+            filteredCars = filteredCars.Where(car => car.Price <= _carsFilter.PriceTo.Value);
         }
 
         if (_carsFilter.SelectedColors.Count != 0)
@@ -127,7 +128,14 @@ public partial class UserCarsForm : Form
         }
 
         _carsBindingSource.DataSource = ToCarsTable(filteredCars);
-        carsDataGridView.Columns["Id"].Visible = false;
+        carsDataGridView.ClearSelection();
+
+        if (filteredCars.Count() == 0)
+        {
+            MessageUtil.ShowInformation("Записів не було знайдено");
+        }
+        
+        searchButton_Click(this, null);
     }
 
     private void resetButton_Click(object sender, EventArgs e)
@@ -143,7 +151,9 @@ public partial class UserCarsForm : Form
         };
 
         _carsBindingSource.DataSource = ToCarsTable(_allCars);
-        carsDataGridView.Columns["Id"].Visible = false;
+        carsDataGridView.ClearSelection();
+        
+        searchButton_Click(this, null);
     }
 
     private DataTable ToCarsTable(IEnumerable<Car> cars)
@@ -165,19 +175,38 @@ public partial class UserCarsForm : Form
 
     private void viewDetailsToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        if (carsDataGridView.SelectedRows.Count == 0)
+        {
+            MessageUtil.ShowError("Оберіть автомобіль для перегляду детальної інформації");
+            return;
+        }
+
         var selectedRowView = (DataRowView)carsDataGridView.CurrentRow.DataBoundItem;
         var selectedRow = selectedRowView.Row;
         var selectedCar = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
+       
         var carDetailsForm = new CarDetailsForm(selectedCar);
         carDetailsForm.ShowDialog();
     }
 
     private async void orderToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        if (carsDataGridView.SelectedRows.Count == 0)
+        {
+            MessageUtil.ShowError("Оберіть автомобіль для створення замовлення");
+            return;
+        }
+
         var selectedRowView = (DataRowView)carsDataGridView.CurrentRow.DataBoundItem;
         var selectedRow = selectedRowView.Row;
         var selectedCar = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
+        
         await _orderService.AddAsync(selectedCar);
+        
         _allCars = _allCars.Where(car => car.Id != selectedRow.Field<int>("Id"));
+        _carsBindingSource.DataSource = ToCarsTable(_allCars);
+        carsDataGridView.ClearSelection();
+        
+        MessageUtil.ShowInformation("Замовлення створено успішно");
     }
 }
