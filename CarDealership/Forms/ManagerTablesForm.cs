@@ -333,7 +333,7 @@ public partial class ManagerTablesForm : Form
             case "Змовлення":
                 var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
 
-                if (selectedOrder.Status != OrderStatus.Pending)
+                if (selectedOrder.Status == OrderStatus.Approved)
                 {
                     MessageUtil.ShowError("Неможливо видалити замовлення");
                     return;

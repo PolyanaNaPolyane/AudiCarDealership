@@ -13,7 +13,7 @@ public static class PdfGenerator
         var backgroundImagePath = Path.Combine(rootPath, "Data", "Images", "details-background.png");
 
         var car = order.Car!;
-        var acc = order.Account!;
+        var account = order.Account!;
         var model = car.TechnicalCharacteristics!.Model!;
         var dealer = car.Dealer!;
 
@@ -59,15 +59,15 @@ public static class PdfGenerator
                             column.Item().Text("— Дані покупця —")
                                 .Bold().FontSize(14).FontColor(Colors.Grey.Darken2);
 
-                            column.Item().Text($"ПІБ: {acc.FirstName} {acc.LastName}");
-                            column.Item().Text($"Email: {acc.Email}");
+                            column.Item().Text($"ПІБ: {account.FirstName} {account.LastName}");
+                            column.Item().Text($"Email: {account.Email}");
 
-                            if (acc.ContactDetails != null)
+                            if (account.ContactDetails != null)
                             {
-                                column.Item().Text($"Телефон: {acc.ContactDetails.PhoneNumber}");
+                                column.Item().Text($"Телефон: {account.ContactDetails.PhoneNumber}");
                                 column.Item()
                                     .Text(
-                                        $"Адреса: {acc.ContactDetails.Country}, {acc.ContactDetails.City}, {acc.ContactDetails.Address}");
+                                        $"Адреса: {account.ContactDetails.Country}, {account.ContactDetails.City}, {account.ContactDetails.Address}");
                             }
                             else
                             {

@@ -70,7 +70,7 @@ public partial class UserCarsForm : Form
 
             var modelName = row.Cells[1].Value.ToString();
 
-            if (!modelName.Contains(searchText))
+            if (!modelName.ToLower().Contains(searchText.ToLower()))
             {
                 continue;
             }
@@ -149,6 +149,8 @@ public partial class UserCarsForm : Form
             SelectedEngineTypes = [],
             SelectedTransmissionTypes = []
         };
+
+        searchTextBox.Text = "";
 
         _carsBindingSource.DataSource = ToCarsTable(_allCars);
         carsDataGridView.ClearSelection();

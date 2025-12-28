@@ -123,6 +123,16 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
             @"SELECT
                 o.Id, 
                 o.AccountId, 
+                account.FirstName,
+                account.LastName,
+                account.Email,
+                account.PasswordHash,
+                account.Type,
+                account.ContactDetailsId as AccountContactDetailsId,
+                accountContactDetails.Country as AccountContactDetailsCountry,
+                accountContactDetails.City as AccountContactDetailsCity,
+                accountContactDetails.Address as AccountContactDetailsAddress,
+                accountContactDetails.PhoneNumber as AccountContactDetailsPhoneNumber,
                 o.CarId, 
                 o.CreatedDate, 
                 o.OverallPrice, 
@@ -135,7 +145,6 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
                 car.Year, 
                 car.Status, 
                 car.TechnicalCharacteristicsId,
-                car.DealerId,
                 technicalCharacteristics.BodyType,
                 technicalCharacteristics.MaxSpeed, 
                 technicalCharacteristics.TransmissionType, 
@@ -146,12 +155,27 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
                 technicalCharacteristics.ModelId,
                 model.Name,
                 model.Brand,
-                model.Class
+                model.Class,
+                car.DealerId,
+                dealer.Name as DealerName,
+                dealer.Schedule,
+                dealer.LeasingCapability,
+                dealer.TestDriveCapability,
+                dealer.ContactDetailsId as DealerContactDetailsId,
+                dealerContactDetails.Country as DealerContactDetailsCountry,
+                dealerContactDetails.City as DealerContactDetailsCity,
+                dealerContactDetails.Address as DealerContactDetailsAddress,
+                dealerContactDetails.PhoneNumber as DealerContactDetailsPhoneNumber
             FROM [Order] o
+            JOIN [Account] account ON account.Id = o.AccountId
+            JOIN [ContactDetails] accountContactDetails ON account.ContactDetailsId = accountContactDetails.Id
             JOIN [Car] car ON car.Id = o.CarId
+            JOIN [Dealer] dealer ON dealer.Id = car.DealerId
+            JOIN [ContactDetails] dealerContactDetails ON dealer.ContactDetailsId = dealerContactDetails.Id
             JOIN [TechnicalCharacteristics] technicalCharacteristics ON technicalCharacteristics.Id = car.TechnicalCharacteristicsId
             JOIN [Model] model ON model.Id = technicalCharacteristics.ModelId
             WHERE o.AccountId = @accountId";
+
 
         await using var command = new SqlCommand(sql, Connection);
         command.Parameters.AddWithValue("@accountId", accountId);
@@ -164,11 +188,52 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
             {
                 Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.Id))),
                 AccountId = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                Account = new Account
+                {
+                    Id =  reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                    FirstName = reader.GetString(reader.GetOrdinal(nameof(Account.FirstName))),
+                    LastName = reader.GetString(reader.GetOrdinal(nameof(Account.LastName))),
+                    Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),
+                    PasswordHash = reader.GetString(reader.GetOrdinal(nameof(Account.PasswordHash))),
+                    Type = (AccountType)reader.GetInt32(reader.GetOrdinal(nameof(Account.Type))),
+                    ContactDetailsId = reader.GetInt32(reader.GetOrdinal("AccountContactDetailsId")),
+                    ContactDetails = new ContactDetails
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("AccountContactDetailsId")),
+                        Country = reader.GetString(reader.GetOrdinal("AccountContactDetailsCountry")),
+                        City = reader.GetString(reader.GetOrdinal("AccountContactDetailsCity")),
+                        Address = reader.GetString(reader.GetOrdinal("AccountContactDetailsAddress")),
+                        PhoneNumber = reader.GetString(reader.GetOrdinal("AccountContactDetailsPhoneNumber"))
+                    }
+                },
                 CarId = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
                 Car = new Car
                 {
                     Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
+                    VIN = reader.GetGuid(reader.GetOrdinal(nameof(Car.VIN))),
+                    Price = reader.GetDecimal(reader.GetOrdinal(nameof(Car.Price))),
+                    ImageUrl = reader.GetString(reader.GetOrdinal(nameof(Car.ImageUrl))),
+                    Color = reader.GetString(reader.GetOrdinal(nameof(Car.Color))),
+                    Year = reader.GetInt32(reader.GetOrdinal(nameof(Car.Year))),
+                    Status = (CarStatus)reader.GetInt32(reader.GetOrdinal(nameof(Car.Status))),
                     DealerId = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId))),
+                    Dealer = new Dealer
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId))),
+                        Name = reader.GetString(reader.GetOrdinal("DealerName")),
+                        Schedule = reader.GetString(reader.GetOrdinal(nameof(Dealer.Schedule))),
+                        LeasingCapability = reader.GetBoolean(reader.GetOrdinal(nameof(Dealer.LeasingCapability))),
+                        TestDriveCapability = reader.GetBoolean(reader.GetOrdinal(nameof(Dealer.TestDriveCapability))),
+                        ContactDetailsId = reader.GetInt32(reader.GetOrdinal("DealerContactDetailsId")),
+                        ContactDetails = new ContactDetails
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("DealerContactDetailsId")),
+                            Country = reader.GetString(reader.GetOrdinal("DealerContactDetailsCountry")),
+                            City = reader.GetString(reader.GetOrdinal("DealerContactDetailsCity")),
+                            Address = reader.GetString(reader.GetOrdinal("DealerContactDetailsAddress")),
+                            PhoneNumber = reader.GetString(reader.GetOrdinal("DealerContactDetailsPhoneNumber"))
+                        }
+                    },
                     TechnicalCharacteristicsId =
                         reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
                     TechnicalCharacteristics = new TechnicalCharacteristics

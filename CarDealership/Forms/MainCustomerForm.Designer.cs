@@ -169,7 +169,6 @@ partial class MainCustomerForm
         Name = "MainCustomerForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Головне меню користувача";
-        Load += MainCustomerForm_Load;
         orderCountGroupBox.ResumeLayout(false);
         spentMoneyGroupBox.ResumeLayout(false);
         customerStatisticsGroupBox.ResumeLayout(false);
