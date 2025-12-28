@@ -62,12 +62,12 @@ public partial class ManagerTablesForm : Form
     {
         tableLabel.Text = "Моделі";
         actionsToolStripMenuItem.Visible = false;
+        filterGroupBox.Visible = false;
         await LoadModelsAsync();
     }
 
     private async Task LoadModelsAsync()
     {
-        searchTextBox.Text = string.Empty;
         var models = await _modelService.GetAllAsync();
         _data.DataSource = ToModelsTable(models);
         dataGridView.DataSource = _data;
@@ -76,7 +76,6 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadTechnicalCharacteristicsAsync()
     {
-        searchTextBox.Text = string.Empty;
         var technicalCharacteristics = await _technicalCharacteristicsService.GetAllAsync();
         _data.DataSource = ToTechnicalCharacteristicsTable(technicalCharacteristics);
         dataGridView.DataSource = _data;
@@ -85,7 +84,6 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadOrdersAsync()
     {
-        searchTextBox.Text = string.Empty;
         _allOrders = await _orderService.GetAllAsync();
         _data.DataSource = ToOrdersTable(_allOrders);
         dataGridView.DataSource = _data;
@@ -94,7 +92,6 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadAccountsAsync()
     {
-        searchTextBox.Text = string.Empty;
         var accounts = await _accountService.GetAllAsync();
         _data.DataSource = ToAccountsTable(accounts);
         dataGridView.DataSource = _data;
@@ -103,7 +100,6 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadDealersAsync()
     {
-        searchTextBox.Text = string.Empty;
         var dealers = await _dealerService.GetAllAsync();
         _data.DataSource = ToDelaersTable(dealers);
         dataGridView.DataSource = _data;
@@ -112,7 +108,6 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadContactDetailsAsync()
     {
-        searchTextBox.Text = string.Empty;
         var contacts = await _contactDetailsService.GetAllAsync();
         _data.DataSource = ToContactDetailsTable(contacts);
         dataGridView.DataSource = _data;
@@ -121,7 +116,6 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadCarsAsync()
     {
-        searchTextBox.Text = string.Empty;
         _allCars = await _carService.GetAllAsync();
         _data.DataSource = ToCarsTable(_allCars);
         dataGridView.DataSource = _data;
@@ -267,49 +261,63 @@ public partial class ManagerTablesForm : Form
     private async void modelsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Моделі";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = false;
+        filterGroupBox.Visible = false;
         await LoadModelsAsync();
     }
 
     private async void technicalCharacteristicsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Технічні характеристики";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = false;
+        filterGroupBox.Visible = false;
         await LoadTechnicalCharacteristicsAsync();
     }
 
     private async void carsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Автомобілі";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = true;
+        filterGroupBox.Visible = true;
         await LoadCarsAsync();
     }
 
     private async void dealersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Дилери";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = false;
+        filterGroupBox.Visible = false;
         await LoadDealersAsync();
     }
 
     private async void accountsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Акаунти";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = false;
+        filterGroupBox.Visible = false;
         await LoadAccountsAsync();
     }
 
     private async void ordersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Замовлення";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = true;
+        filterGroupBox.Visible = true;
         await LoadOrdersAsync();
     }
 
     private async void contactDetailsToolStripMenuItem_Click(object sender, EventArgs e)
     {
         tableLabel.Text = "Контактні дані";
+        searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = false;
+        filterGroupBox.Visible = false;
         await LoadContactDetailsAsync();
     }
 
