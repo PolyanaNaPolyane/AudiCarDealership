@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Data;
 using CarDealership.Data.Entities;
 using CarDealership.Enums;
@@ -430,6 +431,91 @@ public partial class ManagerTablesForm : Form
 
     private void applyButton_Click(object sender, EventArgs e)
     {
+        IEnumerable filteredData = Enumerable.Empty<object>();
+        switch (tableLabel.Text)
+        {
+            case "Автомобілі":
+                var carFilteringForm = new CarsFilteringForm(_carsFilter);
+                carFilteringForm.ShowDialog();
+                _carsFilter = carFilteringForm.CarsFilter;
+
+                var filteredCars = _allCars;
+
+                if (_carsFilter.PriceFrom.HasValue)
+                {
+                    filteredCars = filteredCars.Where(car => car.Price >= _carsFilter.PriceFrom.Value);
+                }
+
+                if (_carsFilter.PriceTo.HasValue)
+                {
+                    filteredCars = filteredCars.Where(car => car.Price <= _carsFilter.PriceTo.Value);
+                }
+
+                if (_carsFilter.SelectedColors.Count != 0)
+                {
+                    filteredCars =
+                        filteredCars.Where(car => _carsFilter.SelectedColors.Any(color => car.Color.Contains(color)));
+                }
+
+                if (_carsFilter.SelectedBodyTypes.Count != 0)
+                {
+                    filteredCars = filteredCars.Where(car =>
+                        _carsFilter.SelectedBodyTypes.Contains((int)car.TechnicalCharacteristics.BodyType));
+                }
+
+                if (_carsFilter.SelectedTransmissionTypes.Count != 0)
+                {
+                    filteredCars = filteredCars.Where(car =>
+                        _carsFilter.SelectedTransmissionTypes.Contains((int)car.TechnicalCharacteristics
+                            .TransmissionType));
+                }
+
+                if (_carsFilter.SelectedEngineTypes.Count != 0)
+                {
+                    filteredCars = filteredCars.Where(car =>
+                        _carsFilter.SelectedEngineTypes.Contains((int)car.TechnicalCharacteristics.EngineType));
+                }
+
+                _data.DataSource = ToCarsTable(filteredCars);
+                dataGridView.ClearSelection();
+                filteredData = filteredCars;
+                break;
+            case "Замовлення":
+                var ordersFilteringForm = new OrdersFilteringForm(_ordersFilter);
+                ordersFilteringForm.ShowDialog();
+                _ordersFilter = ordersFilteringForm.OrdersFilter;
+
+                var filteredOrders = _allOrders;
+
+                if (_ordersFilter.PriceFrom.HasValue)
+                {
+                    filteredOrders = filteredOrders.Where(order => order.OverallPrice >= _ordersFilter.PriceFrom.Value);
+                }
+
+                if (_ordersFilter.PriceTo.HasValue)
+                {
+                    filteredOrders = filteredOrders.Where(order => order.OverallPrice <= _ordersFilter.PriceFrom.Value);
+                }
+
+                if (_ordersFilter.SelectedStatuses.Count != 0)
+                {
+                    filteredOrders =
+                        filteredOrders.Where(order => _ordersFilter.SelectedStatuses.Contains((int)order.Status));
+                }
+
+                _data.DataSource = ToOrdersTable(filteredOrders);
+                dataGridView.ClearSelection();
+                filteredData = filteredOrders;
+                break;
+        }
+        
+        
+        if (filteredData.Cast<object>().Count()== 0)
+        {
+            MessageUtil.ShowInformation("Записів не було знайдено");
+        }
+
+        searchButton_Click(this, null);
     }
 
     private void resetButton_Click(object sender, EventArgs e)
@@ -442,7 +528,7 @@ public partial class ManagerTablesForm : Form
                 _carsFilter = GetEmptyCarsFilter();
                 _data.DataSource = ToCarsTable(_allCars);
                 break;
-            case "Orders":
+            case "Замовлення":
                 _ordersFilter = GetEmptyOrdersFilter();
                 _data.DataSource = ToOrdersTable(_allOrders);
                 break;

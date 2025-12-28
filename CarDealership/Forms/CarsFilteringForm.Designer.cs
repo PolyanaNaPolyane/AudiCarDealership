@@ -55,7 +55,7 @@ partial class CarsFilteringForm
         // colorCheckedListBox
         // 
         colorCheckedListBox.FormattingEnabled = true;
-        colorCheckedListBox.Items.AddRange(new object[] { "Red", "White", "Blue", "Black", "Pink", "Yellow" });
+        colorCheckedListBox.Items.AddRange(new object[] { "Червоний", "Білий", "Синій", "Чорний", "Рожевий", "Жовтий" });
         colorCheckedListBox.Location = new Point(15, 26);
         colorCheckedListBox.Name = "colorCheckedListBox";
         colorCheckedListBox.Size = new Size(150, 114);
