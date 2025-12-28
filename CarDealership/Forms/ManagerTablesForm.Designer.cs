@@ -62,7 +62,7 @@ partial class ManagerTablesForm
         // 
         filterGroupBox.Controls.Add(resetButton);
         filterGroupBox.Controls.Add(applyButton);
-        filterGroupBox.Location = new Point(309, 31);
+        filterGroupBox.Location = new Point(290, 31);
         filterGroupBox.Name = "filterGroupBox";
         filterGroupBox.Size = new Size(263, 65);
         filterGroupBox.TabIndex = 8;
@@ -93,14 +93,14 @@ partial class ManagerTablesForm
         searchGroupBox.Controls.Add(searchTextBox);
         searchGroupBox.Location = new Point(12, 31);
         searchGroupBox.Name = "searchGroupBox";
-        searchGroupBox.Size = new Size(291, 65);
+        searchGroupBox.Size = new Size(272, 65);
         searchGroupBox.TabIndex = 7;
         searchGroupBox.TabStop = false;
         searchGroupBox.Text = "Пошук";
         // 
         // searchButton
         // 
-        searchButton.Location = new Point(185, 26);
+        searchButton.Location = new Point(168, 25);
         searchButton.Name = "searchButton";
         searchButton.Size = new Size(94, 29);
         searchButton.TabIndex = 5;
@@ -111,7 +111,7 @@ partial class ManagerTablesForm
         // 
         searchTextBox.Location = new Point(6, 26);
         searchTextBox.Name = "searchTextBox";
-        searchTextBox.Size = new Size(173, 27);
+        searchTextBox.Size = new Size(156, 27);
         searchTextBox.TabIndex = 5;
         // 
         // dataGridView
@@ -126,7 +126,7 @@ partial class ManagerTablesForm
         dataGridView.ReadOnly = true;
         dataGridView.RowHeadersWidth = 51;
         dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dataGridView.Size = new Size(560, 198);
+        dataGridView.Size = new Size(541, 198);
         dataGridView.TabIndex = 6;
         // 
         // menuStrip1
@@ -135,7 +135,7 @@ partial class ManagerTablesForm
         menuStrip1.Items.AddRange(new ToolStripItem[] { tablesToolStripMenuItem, actionsToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(585, 28);
+        menuStrip1.Size = new Size(566, 28);
         menuStrip1.TabIndex = 9;
         menuStrip1.Text = "menuStrip";
         // 
@@ -236,7 +236,7 @@ partial class ManagerTablesForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(585, 337);
+        ClientSize = new Size(566, 337);
         Controls.Add(tableLabel);
         Controls.Add(filterGroupBox);
         Controls.Add(searchGroupBox);

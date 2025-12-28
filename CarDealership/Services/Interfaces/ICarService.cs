@@ -10,7 +10,7 @@ public interface ICarService
 
     Task<int> GetAvailableByAllDealersAsync();
     Task<IEnumerable<string>> GetMostPopularModelsAsync();
-    Task ChangeStatusAsync(int id, CarStatus status);
+    Task ChangeStatusAsync(int? id, CarStatus status);
     Task AddAsync(Car car);
     Task UpdateAsync(Car car);
     Task DeleteAsync(int id);

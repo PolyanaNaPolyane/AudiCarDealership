@@ -28,9 +28,14 @@ public class CarService(ICarRepository carRepository) : ICarService
         return carRepository.GetMostPopularModelsAsync();
     }
 
-    public Task ChangeStatusAsync(int id, CarStatus status)
+    public Task ChangeStatusAsync(int? id, CarStatus status)
     {
-        return carRepository.ChangeStatusAsync(id, status);
+        if (id == null)
+        {
+            return Task.CompletedTask;
+        }
+
+        return carRepository.ChangeStatusAsync((int)id, status);
     }
 
     public Task AddAsync(Car car)

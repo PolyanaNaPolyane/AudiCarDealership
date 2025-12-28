@@ -6,5 +6,6 @@ public enum BodyType
 {
     [Display(Name = "Седан")] Sedan = 0,
     [Display(Name = "Хетчбек")] Hatchback = 1,
-    [Display(Name = "Купе")] Coupe = 2
+    [Display(Name = "Купе")] Coupe = 2,
+    [Display(Name = "Позашляховик")] SUV = 3
 }

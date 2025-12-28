@@ -46,10 +46,10 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
                 model.Brand,
                 model.Class
             FROM [Order] o
-            JOIN [Car] car ON car.Id = o.CarId
+            LEFT JOIN [Car] car ON car.Id = o.CarId
             JOIN [TechnicalCharacteristics] technicalCharacteristics ON technicalCharacteristics.Id = car.TechnicalCharacteristicsId
             JOIN [Model] model ON model.Id = technicalCharacteristics.ModelId
-            JOIN [Account] account ON account.Id = o.AccountId";
+            LEFT JOIN [Account] account ON account.Id = o.AccountId";
 
         await using var command = new SqlCommand(sql, Connection);
 
@@ -60,49 +60,68 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
             orders.Add(new Order
             {
                 Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.Id))),
-                AccountId = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
-                Account = new Account
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
-                    FirstName = reader.GetString(reader.GetOrdinal(nameof(Account.FirstName))),
-                    LastName = reader.GetString(reader.GetOrdinal(nameof(Account.LastName))),
-                    Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),
-                    PasswordHash = reader.GetString(reader.GetOrdinal(nameof(Account.PasswordHash))),
-                    Type = (AccountType)reader.GetInt32(reader.GetOrdinal(nameof(Account.Type))),
-                    ContactDetailsId = reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
-                },
-                CarId = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
-                Car = new Car
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
-                    DealerId = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId))),
-                    TechnicalCharacteristicsId =
-                        reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
-                    TechnicalCharacteristics = new TechnicalCharacteristics
+                AccountId = reader.IsDBNull(reader.GetOrdinal(nameof(Order.AccountId)))
+                    ? null
+                    : reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                Account = reader.IsDBNull(reader.GetOrdinal(nameof(Account.FirstName)))
+                    ? null
+                    : new Account
                     {
-                        Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
-                        BodyType = (BodyType)reader.GetInt32(
-                            reader.GetOrdinal(nameof(TechnicalCharacteristics.BodyType))),
-                        MaxSpeed = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristics.MaxSpeed))),
-                        TransmissionType =
-                            (TransmissionType)reader.GetInt32(
-                                reader.GetOrdinal(nameof(TechnicalCharacteristics.TransmissionType))),
-                        FuelConsumption =
-                            reader.GetDecimal(reader.GetOrdinal(nameof(TechnicalCharacteristics.FuelConsumption))),
-                        Power = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.Power))),
-                        DrivetrainType =
-                            (DrivetrainType)reader.GetInt32(
-                                reader.GetOrdinal(nameof(TechnicalCharacteristics.DrivetrainType))),
-                        ModelId = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
-                        Model = new Model
+                        Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                        FirstName = reader.GetString(reader.GetOrdinal(nameof(Account.FirstName))),
+                        LastName = reader.GetString(reader.GetOrdinal(nameof(Account.LastName))),
+                        Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),
+                        PasswordHash = reader.GetString(reader.GetOrdinal(nameof(Account.PasswordHash))),
+                        Type = (AccountType)reader.GetInt32(reader.GetOrdinal(nameof(Account.Type))),
+                        ContactDetailsId = reader.IsDBNull(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
+                            ? null
+                            : reader.GetInt32(reader.GetOrdinal(nameof(Account.ContactDetailsId)))
+                    },
+                CarId = reader.IsDBNull(reader.GetOrdinal(nameof(Order.CarId)))
+                    ? null
+                    : reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
+                Car = reader.IsDBNull(reader.GetOrdinal(nameof(Car.VIN)))
+                    ? null
+                    : new Car
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.CarId))),
+                        VIN = reader.GetGuid(reader.GetOrdinal(nameof(Car.VIN))),
+                        Price = reader.GetDecimal(reader.GetOrdinal(nameof(Car.Price))),
+                        ImageUrl = reader.GetString(reader.GetOrdinal(nameof(Car.ImageUrl))),
+                        Color = reader.GetString(reader.GetOrdinal(nameof(Car.Color))),
+                        Year = reader.GetInt32(reader.GetOrdinal(nameof(Car.Year))),
+                        Status = (CarStatus)reader.GetInt32(reader.GetOrdinal(nameof(Car.Status))),
+                        DealerId = reader.GetInt32(reader.GetOrdinal(nameof(Car.DealerId))),
+                        TechnicalCharacteristicsId =
+                            reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                        TechnicalCharacteristics = new TechnicalCharacteristics
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
-                            Name = reader.GetString(reader.GetOrdinal(nameof(Model.Name))),
-                            Brand = reader.GetString(reader.GetOrdinal(nameof(Model.Brand))),
-                            Class = reader.GetString(reader.GetOrdinal(nameof(Model.Class)))
+                            Id = reader.GetInt32(reader.GetOrdinal(nameof(Car.TechnicalCharacteristicsId))),
+                            BodyType = (BodyType)reader.GetInt32(
+                                reader.GetOrdinal(nameof(TechnicalCharacteristics.BodyType))),
+                            MaxSpeed = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.MaxSpeed))),
+                            TransmissionType =
+                                (TransmissionType)reader.GetInt32(
+                                    reader.GetOrdinal(nameof(TechnicalCharacteristics.TransmissionType))),
+                            FuelConsumption =
+                                reader.GetDecimal(reader.GetOrdinal(nameof(TechnicalCharacteristics.FuelConsumption))),
+                            Power = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.Power))),
+                            DrivetrainType =
+                                (DrivetrainType)reader.GetInt32(
+                                    reader.GetOrdinal(nameof(TechnicalCharacteristics.DrivetrainType))),
+                            EngineType =
+                                (EngineType)reader.GetInt32(
+                                    reader.GetOrdinal(nameof(TechnicalCharacteristics.EngineType))),
+                            ModelId = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                            Model = new Model
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                                Name = reader.GetString(reader.GetOrdinal(nameof(Model.Name))),
+                                Brand = reader.GetString(reader.GetOrdinal(nameof(Model.Brand))),
+                                Class = reader.GetString(reader.GetOrdinal(nameof(Model.Class)))
+                            }
                         }
-                    }
-                },
+                    },
                 CreatedDate = reader.GetDateTime(reader.GetOrdinal(nameof(Order.CreatedDate))),
                 OverallPrice = reader.GetDecimal(reader.GetOrdinal(nameof(Order.OverallPrice))),
                 Status = (OrderStatus)reader.GetInt32(reader.GetOrdinal(nameof(Order.Status))),
@@ -190,7 +209,7 @@ public class OrderRepository(string connectionString) : BaseAdoNetRepository(con
                 AccountId = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
                 Account = new Account
                 {
-                    Id =  reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
+                    Id = reader.GetInt32(reader.GetOrdinal(nameof(Order.AccountId))),
                     FirstName = reader.GetString(reader.GetOrdinal(nameof(Account.FirstName))),
                     LastName = reader.GetString(reader.GetOrdinal(nameof(Account.LastName))),
                     Email = reader.GetString(reader.GetOrdinal(nameof(Account.Email))),

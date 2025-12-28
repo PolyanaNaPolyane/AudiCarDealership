@@ -168,7 +168,7 @@ public partial class ManagerTablesForm : Form
         foreach (var order in orders)
         {
             ordersTable.Rows.Add(order.Id, order.Account.Email,
-                $"{order.Car.TechnicalCharacteristics.Model.Brand} {order.Car.TechnicalCharacteristics.Model}",
+                $"{order.Car.TechnicalCharacteristics.Model.Brand} {order.Car.TechnicalCharacteristics.Model.Name}",
                 order.CreatedDate, order.OverallPrice, order.Status.GetDisplayName(), order.StatusChangedDate);
         }
 
