@@ -6,6 +6,7 @@ namespace CarDealership.Services;
 
 public class AccountService(
     IAccountRepository accountRepository,
+    ICarRepository carRepository,
     IContactDetailsRepository contactDetailsRepository,
     IOrderRepository orderRepository,
     IPasswordHasher passwordHasher,
@@ -47,9 +48,10 @@ public class AccountService(
 
     public async Task DeleteAsync()
     {
-        await accountRepository.DeleteAsync(accountContext.CurrentAccount);
-        await contactDetailsRepository.DeleteAsync(accountContext.CurrentAccount.ContactDetails.Id);
+        await carRepository.RelieveCarsByAccountAsync(accountContext.CurrentAccount.Id);
         await orderRepository.DeleteByAccountAsync(accountContext.CurrentAccount.Id);
+        await contactDetailsRepository.DeleteAsync(accountContext.CurrentAccount.ContactDetails.Id);
+        await accountRepository.DeleteAsync(accountContext.CurrentAccount);
     }
 
     public async Task<Account?> LoginAsync(string email, string password)

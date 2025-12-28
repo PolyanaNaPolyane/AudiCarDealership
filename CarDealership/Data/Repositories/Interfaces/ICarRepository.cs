@@ -7,6 +7,7 @@ public interface ICarRepository
 {
     Task<IEnumerable<Car>> GetAllAsync();
     Task<IEnumerable<Car>> GetAvaliableAllAsync();
+    Task RelieveCarsByAccountAsync(int accountId);
     Task ChangeStatusAsync(int id, CarStatus status);
     Task<int> GetAvailableCountAsync();
     Task<IEnumerable<string>> GetMostPopularModelsAsync();

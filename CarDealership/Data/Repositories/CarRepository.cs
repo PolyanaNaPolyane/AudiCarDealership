@@ -7,6 +7,21 @@ namespace CarDealership.Data.Repositories;
 
 public class CarRepository(string connectionString) : BaseAdoNetRepository(connectionString), ICarRepository
 {
+    public async Task RelieveCarsByAccountAsync(int accountId)
+    {
+        var sql =@"
+            UPDATE [Car] 
+            SET Status = 0 
+            FROM [Car] car
+            JOIN [Order] o ON car.Id = o.CarId
+            WHERE o.AccountId = @accountId AND o.Status != 1";
+
+        await using var command = new SqlCommand(sql, Connection);
+        command.Parameters.AddWithValue("@accountId", accountId);
+
+        await command.ExecuteNonQueryAsync();
+    }
+
     public async Task ChangeStatusAsync(int id, CarStatus status)
     {
         var sql = "UPDATE [Car] SET Status = @status WHERE Id = @id";
