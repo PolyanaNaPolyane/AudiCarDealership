@@ -21,22 +21,8 @@ public partial class ManagerTablesForm : Form
     private IEnumerable<Order> _allOrders = [];
     private IEnumerable<Car> _allCars = [];
 
-    private CarsFilter _carsFilter = new()
-    {
-        PriceFrom = null,
-        PriceTo = null,
-        SelectedColors = [],
-        SelectedBodyTypes = [],
-        SelectedEngineTypes = [],
-        SelectedTransmissionTypes = []
-    };
-
-    private OrdersFilter _ordersFilter = new()
-    {
-        PriceFrom = null,
-        PriceTo = null,
-        SelectedStatuses = []
-    };
+    private CarsFilter _carsFilter = GetEmptyCarsFilter();
+    private OrdersFilter _ordersFilter = GetEmptyOrdersFilter();
 
     public ManagerTablesForm(
         ICarService carService,
@@ -282,6 +268,7 @@ public partial class ManagerTablesForm : Form
         searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = true;
         filterGroupBox.Visible = true;
+        _carsFilter = GetEmptyCarsFilter();
         await LoadCarsAsync();
     }
 
@@ -309,6 +296,7 @@ public partial class ManagerTablesForm : Form
         searchTextBox.Text = string.Empty;
         actionsToolStripMenuItem.Visible = true;
         filterGroupBox.Visible = true;
+        _ordersFilter = GetEmptyOrdersFilter();
         await LoadOrdersAsync();
     }
 
@@ -448,4 +436,21 @@ public partial class ManagerTablesForm : Form
     {
 
     }
+    
+    private static CarsFilter GetEmptyCarsFilter() => new()
+    {
+        PriceFrom = null,
+        PriceTo = null,
+        SelectedColors = [],
+        SelectedBodyTypes = [],
+        SelectedEngineTypes = [],
+        SelectedTransmissionTypes = []
+    };
+    
+    private static OrdersFilter GetEmptyOrdersFilter() => new()
+    {
+        PriceFrom = null,
+        PriceTo = null,
+        SelectedStatuses = []
+    };
 }
