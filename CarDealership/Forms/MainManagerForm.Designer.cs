@@ -42,7 +42,6 @@ partial class MainManagerForm
         accountLabel = new Label();
         welcomeLabel = new Label();
         menuStrip1 = new MenuStrip();
-        statisticsToolStripMenuItem = new ToolStripMenuItem();
         tablesToolStripMenuItem = new ToolStripMenuItem();
         statisticsPanel = new Panel();
         statisticsGroupBox.SuspendLayout();
@@ -64,7 +63,7 @@ partial class MainManagerForm
         statisticsGroupBox.Size = new Size(422, 250);
         statisticsGroupBox.TabIndex = 3;
         statisticsGroupBox.TabStop = false;
-        statisticsGroupBox.Text = "Статистика";
+        statisticsGroupBox.Text = "РЎС‚Р°С‚РёСЃС‚РёРєР°";
         // 
         // overallProfitGroupBox
         // 
@@ -74,7 +73,7 @@ partial class MainManagerForm
         overallProfitGroupBox.Size = new Size(250, 77);
         overallProfitGroupBox.TabIndex = 2;
         overallProfitGroupBox.TabStop = false;
-        overallProfitGroupBox.Text = "Загальний прибуток";
+        overallProfitGroupBox.Text = "Р—Р°РіР°Р»СЊРЅРёР№ РїСЂРёР±СѓС‚РѕРє";
         // 
         // overallProfitLabel
         // 
@@ -92,7 +91,7 @@ partial class MainManagerForm
         orderCountGroupBox.Size = new Size(203, 120);
         orderCountGroupBox.TabIndex = 0;
         orderCountGroupBox.TabStop = false;
-        orderCountGroupBox.Text = "Кількість автомобілей для продажу";
+        orderCountGroupBox.Text = "РљС–Р»СЊРєС–СЃС‚СЊ Р°РІС‚РѕРјРѕР±С–Р»РµР№ РґР»СЏ РїСЂРѕРґР°Р¶Сѓ";
         // 
         // carsCountLabel
         // 
@@ -110,7 +109,7 @@ partial class MainManagerForm
         spentMoneyGroupBox.Size = new Size(180, 120);
         spentMoneyGroupBox.TabIndex = 1;
         spentMoneyGroupBox.TabStop = false;
-        spentMoneyGroupBox.Text = "Найпопулярніші моделі";
+        spentMoneyGroupBox.Text = "РќР°Р№РїРѕРїСѓР»СЏСЂРЅС–С€С– РјРѕРґРµР»С–";
         // 
         // mostPopularCarsLabel
         // 
@@ -144,37 +143,31 @@ partial class MainManagerForm
         welcomeLabel.Name = "welcomeLabel";
         welcomeLabel.Size = new Size(410, 23);
         welcomeLabel.TabIndex = 0;
-        welcomeLabel.Text = "Ласкаво просимо";
+        welcomeLabel.Text = "Р›Р°СЃРєР°РІРѕ РїСЂРѕСЃРёРјРѕ";
         welcomeLabel.TextAlign = ContentAlignment.TopCenter;
         // 
         // menuStrip1
         // 
         menuStrip1.ImageScalingSize = new Size(20, 20);
-        menuStrip1.Items.AddRange(new ToolStripItem[] { statisticsToolStripMenuItem, tablesToolStripMenuItem });
+        menuStrip1.Items.AddRange(new ToolStripItem[] { tablesToolStripMenuItem });
         menuStrip1.Location = new Point(0, 0);
         menuStrip1.Name = "menuStrip1";
-        menuStrip1.Size = new Size(478, 28);
+        menuStrip1.Size = new Size(452, 28);
         menuStrip1.TabIndex = 5;
         menuStrip1.Text = "menuStrip";
-        // 
-        // statisticsToolStripMenuItem
-        // 
-        statisticsToolStripMenuItem.Name = "statisticsToolStripMenuItem";
-        statisticsToolStripMenuItem.Size = new Size(98, 24);
-        statisticsToolStripMenuItem.Text = "Статистика";
         // 
         // tablesToolStripMenuItem
         // 
         tablesToolStripMenuItem.Name = "tablesToolStripMenuItem";
         tablesToolStripMenuItem.Size = new Size(78, 24);
-        tablesToolStripMenuItem.Text = "Таблиці";
+        tablesToolStripMenuItem.Text = "РўР°Р±Р»РёС†С–";
         tablesToolStripMenuItem.Click += tablesToolStripMenuItem_Click;
         // 
         // statisticsPanel
         // 
         statisticsPanel.Controls.Add(welcomeGroupBox);
         statisticsPanel.Controls.Add(statisticsGroupBox);
-        statisticsPanel.Location = new Point(12, 31);
+        statisticsPanel.Location = new Point(0, 31);
         statisticsPanel.Name = "statisticsPanel";
         statisticsPanel.Size = new Size(454, 353);
         statisticsPanel.TabIndex = 6;
@@ -183,7 +176,7 @@ partial class MainManagerForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(478, 398);
+        ClientSize = new Size(452, 383);
         Controls.Add(statisticsPanel);
         Controls.Add(menuStrip1);
         FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -191,8 +184,7 @@ partial class MainManagerForm
         MaximizeBox = false;
         Name = "MainManagerForm";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Головне меню менеджера";
-        Load += MainManagerForm_Load;
+        Text = "Р“РѕР»РѕРІРЅРµ РјРµРЅСЋ РјРµРЅРµРґР¶РµСЂР°";
         statisticsGroupBox.ResumeLayout(false);
         overallProfitGroupBox.ResumeLayout(false);
         orderCountGroupBox.ResumeLayout(false);
@@ -218,7 +210,6 @@ partial class MainManagerForm
     private GroupBox overallProfitGroupBox;
     private Label overallProfitLabel;
     private MenuStrip menuStrip1;
-    private ToolStripMenuItem statisticsToolStripMenuItem;
     private ToolStripMenuItem tablesToolStripMenuItem;
     private Panel statisticsPanel;
 }

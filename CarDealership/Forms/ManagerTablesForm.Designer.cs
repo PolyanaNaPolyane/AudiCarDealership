@@ -116,10 +116,16 @@ partial class ManagerTablesForm
         // 
         // dataGridView
         // 
+        dataGridView.AllowUserToAddRows = false;
+        dataGridView.AllowUserToDeleteRows = false;
+        dataGridView.AllowUserToResizeRows = false;
         dataGridView.ColumnHeadersHeight = 29;
         dataGridView.Location = new Point(12, 127);
+        dataGridView.MultiSelect = false;
         dataGridView.Name = "dataGridView";
+        dataGridView.ReadOnly = true;
         dataGridView.RowHeadersWidth = 51;
+        dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dataGridView.Size = new Size(560, 198);
         dataGridView.TabIndex = 6;
         // 
