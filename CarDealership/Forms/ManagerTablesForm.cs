@@ -386,12 +386,12 @@ public partial class ManagerTablesForm : Form
         {
             row.DefaultCellStyle.BackColor = Color.White;
         }
-        
+
         if (string.IsNullOrWhiteSpace(searchText))
         {
             return;
         }
-        
+
         int foundRowsCount = 0;
 
         foreach (DataGridViewRow row in dataGridView.Rows)
@@ -400,27 +400,28 @@ public partial class ManagerTablesForm : Form
             {
                 continue;
             }
-            
+
             var columnToSearch = tableLabel.Text switch
             {
                 "Моделі" => row.Cells[1].Value.ToString(),
-                "Технічні характеристики" => $"{row.Cells[1].Value}{row.Cells[3].Value}{row.Cells[6].Value}{row.Cells[7].Value}",
+                "Технічні характеристики" =>
+                    $"{row.Cells[1].Value}{row.Cells[3].Value}{row.Cells[6].Value}{row.Cells[7].Value}",
                 "Автомобілі" => row.Cells[1].Value.ToString(),
                 "Дилери" => row.Cells[1].Value.ToString(),
                 "Акаунти" => $"{row.Cells[1].Value}{row.Cells[2].Value}{row.Cells[3].Value}",
                 "Замовлення" => $"{row.Cells[1].Value}{row.Cells[2].Value}",
                 "Контактні дані" => $"{row.Cells[1].Value}{row.Cells[2].Value}{row.Cells[3].Value}",
             };
-            
+
             if (!columnToSearch.ToLower().Contains(searchText.ToLower()))
             {
                 continue;
             }
-            
+
             foundRowsCount++;
             row.DefaultCellStyle.BackColor = Color.LightGreen;
         }
-        
+
         if (foundRowsCount == 0)
         {
             MessageUtil.ShowInformation("Записів не було знайдено");
@@ -429,14 +430,28 @@ public partial class ManagerTablesForm : Form
 
     private void applyButton_Click(object sender, EventArgs e)
     {
-
     }
 
     private void resetButton_Click(object sender, EventArgs e)
     {
+        searchTextBox.Text = string.Empty;
 
+        switch (tableLabel.Text)
+        {
+            case "Автомобілі":
+                _carsFilter = GetEmptyCarsFilter();
+                _data.DataSource = ToCarsTable(_allCars);
+                break;
+            case "Orders":
+                _ordersFilter = GetEmptyOrdersFilter();
+                _data.DataSource = ToOrdersTable(_allOrders);
+                break;
+        }
+
+        dataGridView.ClearSelection();
+        searchButton_Click(this, null);
     }
-    
+
     private static CarsFilter GetEmptyCarsFilter() => new()
     {
         PriceFrom = null,
@@ -446,7 +461,7 @@ public partial class ManagerTablesForm : Form
         SelectedEngineTypes = [],
         SelectedTransmissionTypes = []
     };
-    
+
     private static OrdersFilter GetEmptyOrdersFilter() => new()
     {
         PriceFrom = null,
