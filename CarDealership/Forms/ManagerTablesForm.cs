@@ -67,6 +67,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadModelsAsync()
     {
+        searchTextBox.Text = string.Empty;
         var models = await _modelService.GetAllAsync();
         _data.DataSource = ToModelsTable(models);
         dataGridView.DataSource = _data;
@@ -75,6 +76,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadTechnicalCharacteristicsAsync()
     {
+        searchTextBox.Text = string.Empty;
         var technicalCharacteristics = await _technicalCharacteristicsService.GetAllAsync();
         _data.DataSource = ToTechnicalCharacteristicsTable(technicalCharacteristics);
         dataGridView.DataSource = _data;
@@ -83,6 +85,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadOrdersAsync()
     {
+        searchTextBox.Text = string.Empty;
         _allOrders = await _orderService.GetAllAsync();
         _data.DataSource = ToOrdersTable(_allOrders);
         dataGridView.DataSource = _data;
@@ -91,6 +94,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadAccountsAsync()
     {
+        searchTextBox.Text = string.Empty;
         var accounts = await _accountService.GetAllAsync();
         _data.DataSource = ToAccountsTable(accounts);
         dataGridView.DataSource = _data;
@@ -99,6 +103,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadDealersAsync()
     {
+        searchTextBox.Text = string.Empty;
         var dealers = await _dealerService.GetAllAsync();
         _data.DataSource = ToDelaersTable(dealers);
         dataGridView.DataSource = _data;
@@ -107,6 +112,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadContactDetailsAsync()
     {
+        searchTextBox.Text = string.Empty;
         var contacts = await _contactDetailsService.GetAllAsync();
         _data.DataSource = ToContactDetailsTable(contacts);
         dataGridView.DataSource = _data;
@@ -115,6 +121,7 @@ public partial class ManagerTablesForm : Form
 
     private async Task LoadCarsAsync()
     {
+        searchTextBox.Text = string.Empty;
         _allCars = await _carService.GetAllAsync();
         _data.DataSource = ToCarsTable(_allCars);
         dataGridView.DataSource = _data;
@@ -301,7 +308,7 @@ public partial class ManagerTablesForm : Form
 
     private async void contactDetailsToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        tableLabel.Text = "Контакні дані";
+        tableLabel.Text = "Контактні дані";
         actionsToolStripMenuItem.Visible = false;
         await LoadContactDetailsAsync();
     }
