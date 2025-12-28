@@ -391,6 +391,12 @@ public partial class ManagerTablesForm : Form
 
     private void editToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        if (dataGridView.SelectedRows.Count == 0)
+        {
+            MessageUtil.ShowError("Оберіть запис для редагування");
+            return;
+        }
+        
         var selectedRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
         var selectedRow = selectedRowView.Row;
 
