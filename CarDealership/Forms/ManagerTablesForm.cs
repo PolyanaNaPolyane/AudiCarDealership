@@ -70,6 +70,7 @@ public partial class ManagerTablesForm : Form
         var models = await _modelService.GetAllAsync();
         _data.DataSource = ToModelsTable(models);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private async Task LoadTechnicalCharacteristicsAsync()
@@ -77,6 +78,7 @@ public partial class ManagerTablesForm : Form
         var technicalCharacteristics = await _technicalCharacteristicsService.GetAllAsync();
         _data.DataSource = ToTechnicalCharacteristicsTable(technicalCharacteristics);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private async Task LoadOrdersAsync()
@@ -84,6 +86,7 @@ public partial class ManagerTablesForm : Form
         _allOrders = await _orderService.GetAllAsync();
         _data.DataSource = ToOrdersTable(_allOrders);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private async Task LoadAccountsAsync()
@@ -91,6 +94,7 @@ public partial class ManagerTablesForm : Form
         var accounts = await _accountService.GetAllAsync();
         _data.DataSource = ToAccountsTable(accounts);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private async Task LoadDealersAsync()
@@ -98,6 +102,7 @@ public partial class ManagerTablesForm : Form
         var dealers = await _dealerService.GetAllAsync();
         _data.DataSource = ToDelaersTable(dealers);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private async Task LoadContactDetailsAsync()
@@ -105,6 +110,7 @@ public partial class ManagerTablesForm : Form
         var contacts = await _contactDetailsService.GetAllAsync();
         _data.DataSource = ToContactDetailsTable(contacts);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private async Task LoadCarsAsync()
@@ -112,6 +118,7 @@ public partial class ManagerTablesForm : Form
         _allCars = await _carService.GetAllAsync();
         _data.DataSource = ToCarsTable(_allCars);
         dataGridView.DataSource = _data;
+        dataGridView.ClearSelection();
     }
 
     private DataTable ToModelsTable(IEnumerable<Model> models)
@@ -366,5 +373,64 @@ public partial class ManagerTablesForm : Form
                 updateOrderForm.ShowDialog();
                 break;
         }
+    }
+
+    private void searchButton_Click(object sender, EventArgs e)
+    {
+        string searchText = searchTextBox.Text.Trim();
+
+        foreach (DataGridViewRow row in dataGridView.Rows)
+        {
+            row.DefaultCellStyle.BackColor = Color.White;
+        }
+        
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            return;
+        }
+        
+        int foundRowsCount = 0;
+
+        foreach (DataGridViewRow row in dataGridView.Rows)
+        {
+            if (row.IsNewRow)
+            {
+                continue;
+            }
+            
+            var columnToSearch = tableLabel.Text switch
+            {
+                "Моделі" => row.Cells[1].Value.ToString(),
+                "Технічні характеристики" => $"{row.Cells[1].Value}{row.Cells[3].Value}{row.Cells[6].Value}{row.Cells[7].Value}",
+                "Автомобілі" => row.Cells[1].Value.ToString(),
+                "Дилери" => row.Cells[1].Value.ToString(),
+                "Акаунти" => $"{row.Cells[1].Value}{row.Cells[2].Value}{row.Cells[3].Value}",
+                "Замовлення" => $"{row.Cells[1].Value}{row.Cells[2].Value}",
+                "Контактні дані" => $"{row.Cells[1].Value}{row.Cells[2].Value}{row.Cells[3].Value}",
+            };
+            
+            if (!columnToSearch.ToLower().Contains(searchText.ToLower()))
+            {
+                continue;
+            }
+            
+            foundRowsCount++;
+            row.DefaultCellStyle.BackColor = Color.LightGreen;
+        }
+        
+        if (foundRowsCount == 0)
+        {
+            MessageUtil.ShowInformation("Записів не було знайдено");
+        }
+    }
+
+    private void applyButton_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void resetButton_Click(object sender, EventArgs e)
+    {
+
     }
 }

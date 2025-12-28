@@ -77,6 +77,7 @@ partial class ManagerTablesForm
         resetButton.TabIndex = 1;
         resetButton.Text = "Зняти фільтр";
         resetButton.UseVisualStyleBackColor = true;
+        resetButton.Click += resetButton_Click;
         // 
         // applyButton
         // 
@@ -86,6 +87,7 @@ partial class ManagerTablesForm
         applyButton.TabIndex = 0;
         applyButton.Text = "Накласти фільтр";
         applyButton.UseVisualStyleBackColor = true;
+        applyButton.Click += applyButton_Click;
         // 
         // searchGroupBox
         // 
@@ -106,6 +108,7 @@ partial class ManagerTablesForm
         searchButton.TabIndex = 5;
         searchButton.Text = "Шукати";
         searchButton.UseVisualStyleBackColor = true;
+        searchButton.Click += searchButton_Click;
         // 
         // searchTextBox
         // 
