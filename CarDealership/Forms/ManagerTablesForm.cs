@@ -167,8 +167,10 @@ public partial class ManagerTablesForm : Form
 
         foreach (var order in orders)
         {
-            ordersTable.Rows.Add(order.Id, order.Account.Email,
-                $"{order.Car.TechnicalCharacteristics.Model.Brand} {order.Car.TechnicalCharacteristics.Model.Name}",
+            ordersTable.Rows.Add(order.Id, order.Account?.Email ?? "-",
+                order.Car != null
+                    ? $"{order.Car.TechnicalCharacteristics.Model.Brand} {order.Car.TechnicalCharacteristics.Model.Name}"
+                    : "-",
                 order.CreatedDate, order.OverallPrice, order.Status.GetDisplayName(), order.StatusChangedDate);
         }
 
@@ -327,7 +329,7 @@ public partial class ManagerTablesForm : Form
                     MessageUtil.ShowError("Неможливо видалити автомобіль");
                     return;
                 }
-                
+
                 await _carService.DeleteAsync(selectedCar.Id);
                 break;
             case "Змовлення":
@@ -354,7 +356,8 @@ public partial class ManagerTablesForm : Form
         {
             case "Автомобілі":
                 var carToUpdate = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
-                var updateCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService, carToUpdate);
+                var updateCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService,
+                    carToUpdate);
                 updateCarForm.ShowDialog();
                 break;
             case "Замовлення":
