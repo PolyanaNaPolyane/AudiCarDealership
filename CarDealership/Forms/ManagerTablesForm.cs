@@ -327,13 +327,19 @@ public partial class ManagerTablesForm : Form
 
     private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var selectedRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
-        var selectedRow = selectedRowView.Row;
-
         switch (tableLabel.Text)
         {
             case "Автомобілі":
-                var selectedCar = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
+                if (dataGridView.SelectedRows.Count == 0)
+                {
+                    MessageUtil.ShowError("Оберіть запис для видалення");
+                    return;
+                }
+
+                var selectedCarRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
+                var selectedCarRow = selectedCarRowView.Row;
+
+                var selectedCar = _allCars.First(car => car.Id == selectedCarRow.Field<int>("Id"));
 
                 if (selectedCar.Status != CarStatus.Available)
                 {
@@ -341,14 +347,39 @@ public partial class ManagerTablesForm : Form
                     return;
                 }
 
+                var choiceCarDelete = MessageBox.Show("Ви впевнені, що хочете продовжити видалення автомобіля?",
+                    "Інформація", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (choiceCarDelete != DialogResult.OK)
+                {
+                    return;
+                }
+
                 await _carService.DeleteAsync(selectedCar.Id);
                 break;
             case "Змовлення":
-                var selectedOrder = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
+                if (dataGridView.SelectedRows.Count == 0)
+                {
+                    MessageUtil.ShowError("Оберіть запис для видалення");
+                    return;
+                }
+
+                var selectedOrderRowView = (DataRowView)dataGridView.CurrentRow.DataBoundItem;
+                var selectedOrderRow = selectedOrderRowView.Row;
+
+                var selectedOrder = _allOrders.First(car => car.Id == selectedOrderRow.Field<int>("Id"));
 
                 if (selectedOrder.Status == OrderStatus.Approved)
                 {
                     MessageUtil.ShowError("Неможливо видалити замовлення");
+                    return;
+                }
+
+                var choiceOrderDelete = MessageBox.Show("Ви впевнені, що хочете продовжити видалення замовлення?",
+                    "Інформація", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (choiceOrderDelete != DialogResult.OK)
+                {
                     return;
                 }
 
@@ -508,9 +539,9 @@ public partial class ManagerTablesForm : Form
                 filteredData = filteredOrders;
                 break;
         }
-        
-        
-        if (filteredData.Cast<object>().Count()== 0)
+
+
+        if (filteredData.Cast<object>().Count() == 0)
         {
             MessageUtil.ShowInformation("Записів не було знайдено");
         }
