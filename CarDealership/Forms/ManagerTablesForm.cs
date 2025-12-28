@@ -357,7 +357,7 @@ public partial class ManagerTablesForm : Form
 
                 await _carService.DeleteAsync(selectedCar.Id);
                 break;
-            case "Змовлення":
+            case "Замовлення":
                 if (dataGridView.SelectedRows.Count == 0)
                 {
                     MessageUtil.ShowError("Оберіть запис для видалення");
