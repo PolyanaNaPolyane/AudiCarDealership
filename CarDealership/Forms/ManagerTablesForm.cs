@@ -310,17 +310,19 @@ public partial class ManagerTablesForm : Form
         await LoadContactDetailsAsync();
     }
 
-    private void addToolStripMenuItem_Click(object sender, EventArgs e)
+    private async void addToolStripMenuItem_Click(object sender, EventArgs e)
     {
         switch (tableLabel.Text)
         {
             case "Автомобілі":
                 var addCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService);
                 addCarForm.ShowDialog();
+                await LoadCarsAsync();
                 break;
             case "Замовлення":
                 var addOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService);
                 addOrderForm.ShowDialog();
+                await LoadOrdersAsync();
                 break;
         }
     }

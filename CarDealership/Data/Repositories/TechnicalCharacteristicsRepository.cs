@@ -12,7 +12,14 @@ public class TechnicalCharacteristicsRepository(string connectionString)
     {
         var technicalCharacteristics = new List<TechnicalCharacteristics>();
 
-        var sql = "SELECT * FROM [TechnicalCharacteristics]";
+        var sql = @"
+            SELECT
+                technicalCharacteristics.*,
+                model.Name,
+                model.Brand,
+                model.Class
+            FROM [TechnicalCharacteristics] technicalCharacteristics
+            JOIN [Model] model ON technicalCharacteristics.ModelId = model.Id";
 
         await using var command = new SqlCommand(sql, Connection);
         await using var reader = await command.ExecuteReaderAsync();
@@ -36,6 +43,13 @@ public class TechnicalCharacteristicsRepository(string connectionString)
                 EngineType =
                     (EngineType)reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.EngineType))),
                 ModelId = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                Model = new Model
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal(nameof(TechnicalCharacteristics.ModelId))),
+                    Name = reader.GetString(reader.GetOrdinal(nameof(Model.Name))),
+                    Brand = reader.GetString(reader.GetOrdinal(nameof(Model.Brand))),
+                    Class = reader.GetString(reader.GetOrdinal(nameof(Model.Class)))
+                }
             });
         }
 

@@ -99,7 +99,6 @@ public partial class UpsertCarForm : Form
 
         var car = new Car
         {
-            Id = _car.Id,
             VIN = Guid.Parse(vinTextBox.Text),
             Price = decimal.Parse(priceTextBox.Text),
             ImageUrl = imageUrlTextBox.Text,
@@ -112,6 +111,8 @@ public partial class UpsertCarForm : Form
 
         if (_isEditing)
         {
+            car.Id = _car.Id;
+
             await _carService.UpdateAsync(car);
         }
         else
