@@ -404,12 +404,26 @@ public partial class ManagerTablesForm : Form
         {
             case "Автомобілі":
                 var carToUpdate = _allCars.First(car => car.Id == selectedRow.Field<int>("Id"));
+                
+                if (carToUpdate.Status != CarStatus.Available)
+                {
+                    MessageUtil.ShowError("Неможливо редагувати автомобіль");
+                    return;
+                }
+                
                 var updateCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService,
                     carToUpdate);
                 updateCarForm.ShowDialog();
                 break;
             case "Замовлення":
                 var orderToUpdate = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
+                
+                if (orderToUpdate.Status == OrderStatus.Approved)
+                {
+                    MessageUtil.ShowError("Неможливо редагувати замовлення");
+                    return;
+                }
+                
                 var updateOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService, orderToUpdate);
                 updateOrderForm.ShowDialog();
                 break;
