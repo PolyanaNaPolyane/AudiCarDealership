@@ -101,7 +101,6 @@ public partial class UpsertOrderForm : Form
 
         var order = new Order
         {
-            Id = _order.Id,
             AccountId = (int)accountComboBox.SelectedValue,
             CarId = (int)carComboBox.SelectedValue,
             CreatedDate = orderCreationDateTimePicker.Value,
@@ -112,6 +111,8 @@ public partial class UpsertOrderForm : Form
 
         if (_isEditing)
         {
+            order.Id = _order.Id;
+
             await _orderService.UpdateAsync(order);
 
             if (order.CarId != _order.CarId)

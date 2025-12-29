@@ -358,6 +358,7 @@ public partial class ManagerTablesForm : Form
                 }
 
                 await _carService.DeleteAsync(selectedCar.Id);
+                await LoadCarsAsync();
                 break;
             case "Замовлення":
                 if (dataGridView.SelectedRows.Count == 0)
@@ -371,7 +372,7 @@ public partial class ManagerTablesForm : Form
 
                 var selectedOrder = _allOrders.First(car => car.Id == selectedOrderRow.Field<int>("Id"));
 
-                if (selectedOrder.Status == OrderStatus.Approved)
+                if (selectedOrder.Status != OrderStatus.Pending)
                 {
                     MessageUtil.ShowError("Неможливо видалити замовлення");
                     return;
@@ -387,11 +388,12 @@ public partial class ManagerTablesForm : Form
 
                 await _orderService.DeleteAsync(selectedOrder.Id);
                 await _carService.ChangeStatusAsync(selectedOrder.CarId, CarStatus.Available);
+                await LoadOrdersAsync();
                 break;
         }
     }
 
-    private void editToolStripMenuItem_Click(object sender, EventArgs e)
+    private async void editToolStripMenuItem_Click(object sender, EventArgs e)
     {
         if (dataGridView.SelectedRows.Count == 0)
         {
@@ -416,11 +418,12 @@ public partial class ManagerTablesForm : Form
                 var updateCarForm = new UpsertCarForm(_carService, _technicalCharacteristicsService, _dealerService,
                     carToUpdate);
                 updateCarForm.ShowDialog();
+                await LoadCarsAsync();
                 break;
             case "Замовлення":
                 var orderToUpdate = _allOrders.First(car => car.Id == selectedRow.Field<int>("Id"));
                 
-                if (orderToUpdate.Status == OrderStatus.Approved)
+                if (orderToUpdate.Status != OrderStatus.Pending)
                 {
                     MessageUtil.ShowError("Неможливо редагувати замовлення");
                     return;
@@ -428,6 +431,7 @@ public partial class ManagerTablesForm : Form
                 
                 var updateOrderForm = new UpsertOrderForm(_orderService, _accountService, _carService, orderToUpdate);
                 updateOrderForm.ShowDialog();
+                await LoadOrdersAsync();
                 break;
         }
     }
