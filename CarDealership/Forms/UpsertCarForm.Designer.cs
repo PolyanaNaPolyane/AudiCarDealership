@@ -110,9 +110,9 @@ partial class UpsertCarForm
         technicalCharacteristicsLabel.AutoSize = true;
         technicalCharacteristicsLabel.Location = new Point(12, 302);
         technicalCharacteristicsLabel.Name = "technicalCharacteristicsLabel";
-        technicalCharacteristicsLabel.Size = new Size(182, 20);
+        technicalCharacteristicsLabel.Size = new Size(225, 20);
         technicalCharacteristicsLabel.TabIndex = 6;
-        technicalCharacteristicsLabel.Text = "Технічні характеристики:";
+        technicalCharacteristicsLabel.Text = "Модель та тех. характеристики:";
         // 
         // dealerLabel
         // 
@@ -125,7 +125,7 @@ partial class UpsertCarForm
         // 
         // okButton
         // 
-        okButton.Location = new Point(54, 394);
+        okButton.Location = new Point(274, 392);
         okButton.Name = "okButton";
         okButton.Size = new Size(94, 29);
         okButton.TabIndex = 8;
@@ -135,7 +135,7 @@ partial class UpsertCarForm
         // 
         // cancelButton
         // 
-        cancelButton.Location = new Point(230, 394);
+        cancelButton.Location = new Point(404, 392);
         cancelButton.Name = "cancelButton";
         cancelButton.Size = new Size(94, 29);
         cancelButton.TabIndex = 9;
@@ -198,16 +198,16 @@ partial class UpsertCarForm
         // technicalCharacteristicsComboBox
         // 
         technicalCharacteristicsComboBox.FormattingEnabled = true;
-        technicalCharacteristicsComboBox.Location = new Point(200, 299);
+        technicalCharacteristicsComboBox.Location = new Point(243, 299);
         technicalCharacteristicsComboBox.Name = "technicalCharacteristicsComboBox";
-        technicalCharacteristicsComboBox.Size = new Size(151, 28);
+        technicalCharacteristicsComboBox.Size = new Size(840, 28);
         technicalCharacteristicsComboBox.TabIndex = 17;
         // 
         // UpsertCarForm
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(362, 433);
+        ClientSize = new Size(1095, 433);
         Controls.Add(technicalCharacteristicsComboBox);
         Controls.Add(dealerComboBox);
         Controls.Add(statusComboBox);
