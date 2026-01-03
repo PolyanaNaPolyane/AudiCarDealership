@@ -1,4 +1,5 @@
 ﻿using CarDealership.Enums;
+using CarDealership.Utils;
 
 namespace CarDealership.Data.Entities;
 
@@ -17,5 +18,5 @@ public class TechnicalCharacteristics : Entity
     public Model? Model { get; set; }
 
 
-    public string CharacteristicsName => $"{Model?.Brand} {Model?.Name}";
+    public string CharacteristicsName => $"{Model?.Brand} {Model?.Name} {BodyType.GetDisplayName()} {$"Макс. шв.: {MaxSpeed}"} {TransmissionType.GetDisplayName()} {$"Споживання: {FuelConsumption}"} {$"Потужність: {Power}"} {DrivetrainType.GetDisplayName()} {EngineType.GetDisplayName()}";
 }

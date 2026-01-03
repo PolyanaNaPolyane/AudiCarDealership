@@ -129,6 +129,7 @@ public partial class ManagerTablesForm : Form
     {
         var technicalCharacteristicsTable = new DataTable();
         technicalCharacteristicsTable.Columns.Add("Id", typeof(int));
+        technicalCharacteristicsTable.Columns.Add("Модель", typeof(string));
         technicalCharacteristicsTable.Columns.Add("Тип кузова", typeof(string));
         technicalCharacteristicsTable.Columns.Add("Максимальна швидкість", typeof(int));
         technicalCharacteristicsTable.Columns.Add("Тип трансміссії", typeof(string));
@@ -140,7 +141,7 @@ public partial class ManagerTablesForm : Form
 
         foreach (var characteristics in technicalCharacteristics)
         {
-            technicalCharacteristicsTable.Rows.Add(characteristics.Id, characteristics.BodyType.GetDisplayName(),
+            technicalCharacteristicsTable.Rows.Add(characteristics.Id, $"{characteristics.Model.Brand} {characteristics.Model.Name}", characteristics.BodyType.GetDisplayName(),
                 characteristics.MaxSpeed, characteristics.TransmissionType.GetDisplayName(),
                 characteristics.FuelConsumption, characteristics.Power, characteristics.DrivetrainType.GetDisplayName(),
                 characteristics.EngineType.GetDisplayName());
